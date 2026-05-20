@@ -110,19 +110,43 @@ public class PatientDAO {
 
     public Patient getPatientById(int patientId) throws SQLException
     {
-        try (Connection connection = getConnection())
+        String sql = """
+            SELECT
+                p.patient_id,
+                p.last_visit,
+                p.medical_notes,
+                p.cpr,
+                u.first_name,
+                u.last_name,
+                u.day_of_birth,
+                u.gender,
+                u.phone_num,
+                u.email,
+                u.password,
+                u.username
+            FROM patient p
+            JOIN users u ON p.patient_id = u.id
+            WHERE p.patient_id = ?
+            """;
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql))
         {
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT  * FROM Patient WHERE patient_id = ?");
             statement.setInt(1, patientId);
 
             ResultSet resultSet = statement.executeQuery();
+
             if (resultSet.next())
             {
                 return extractPatient(resultSet);
             }
         }
+
         return null;
+    }
+
+    public void updatePatient(String userName) throws SQLException {
+        Patient patient = getPatientByUsername(userName);
     }
 
     public ArrayList<Patient> getAllPatients() throws SQLException

@@ -23,7 +23,7 @@ public class ViewModelFactory {
         doctorViewModel = new DoctorViewModel(handler, loginViewModel);
         receptionistViewModel = new ReceptionistViewModel(handler, loginViewModel);
         bookAppointmentViewModel = new BookAppointmentViewModel(handler, patientViewModel, doctorViewModel);
-        myAppointmentViewModel = new MyAppointmentViewModel(handler);
+        myAppointmentViewModel = new MyAppointmentViewModel(handler, patientViewModel);
     }
 
     public CreateAccountViewModel getCreateAccountViewModel() {

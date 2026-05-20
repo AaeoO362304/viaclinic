@@ -127,18 +127,36 @@ public class DoctorDAO {
 
     public Doctor getDoctorById(int doctorId) throws SQLException
     {
-        try (Connection connection = getConnection())
+        String sql = """
+            SELECT
+                d.doctor_id,
+                d.specialization,
+                u.first_name,
+                u.last_name,
+                u.email,
+                u.phone_num,
+                u.username,
+                u.password,
+                u.gender,
+                u.day_of_birth
+            FROM doctor d
+            JOIN users u ON d.doctor_id = u.id
+            WHERE d.doctor_id = ?
+            """;
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql))
         {
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT  * FROM Doctor WHERE doctor_id = ?");
             statement.setInt(1, doctorId);
 
             ResultSet resultSet = statement.executeQuery();
+
             if (resultSet.next())
             {
                 return extractDoctor(resultSet);
             }
         }
+
         return null;
     }
 

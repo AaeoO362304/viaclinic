@@ -85,7 +85,7 @@ public class ViewHandler {
                 root = loadReceptionistBookAppointmentWindow("/client/view/functions/ReceptionistBookAppointmentWindow.fxml");
                 break;
             case "my_appointments":
-                root = loadMyAppointmentsWindow("/client/view/functions/MyAppointmentsWindow.fxml");
+                root = loadMyAppointmentsWindow("/client/view/functions/MyAppointmentWindow.fxml");
                 break;
             case "all_appointments":
                 root = loadAllAppointmentsWindow("/client/view/functions/AllAppointmentsWindow.fxml");
@@ -317,7 +317,7 @@ public class ViewHandler {
         {
             myAppointmentWindowController.reset();
         }
-        return  myAppointmentWindowController.getRoot();;
+        return  myAppointmentWindowController.getRoot();
     }
 
     private Region loadAllAppointmentsWindow(String fxmlFile) {
