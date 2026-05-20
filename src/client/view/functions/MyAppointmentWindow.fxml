@@ -10,10 +10,10 @@
       <Button fx:id="cancelButton" layoutX="349.0" layoutY="284.0" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="53.0" prefWidth="198.0" text="Cancel" />
       <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="14.0" prefHeight="248.0" prefWidth="566.0">
         <columns>
-          <TableColumn fx:id="appointmentDateColumn" prefWidth="134.0" text="Appointment Date" />
-          <TableColumn fx:id="doctorColumn" minWidth="8.0" prefWidth="125.0" text="Doctor" />
-            <TableColumn fx:id="statusColumn" prefWidth="44.0" text="Status" />
-            <TableColumn fx:id="notesColumn" prefWidth="262.0" text="Notes" />
+          <TableColumn fx:id="appointmentDateColumn" editable="false" prefWidth="134.0" resizable="false" sortable="false" text="Appointment Date" />
+          <TableColumn fx:id="doctorColumn" editable="false" minWidth="8.0" prefWidth="125.0" resizable="false" sortable="false" text="Doctor" />
+            <TableColumn fx:id="statusColumn" editable="false" prefWidth="44.0" resizable="false" sortable="false" text="Status" />
+            <TableColumn fx:id="notesColumn" editable="false" prefWidth="262.0" resizable="false" sortable="false" text="Notes" />
         </columns>
       </TableView>
    </children>
