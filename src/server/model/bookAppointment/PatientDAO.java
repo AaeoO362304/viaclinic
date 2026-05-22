@@ -145,8 +145,70 @@ public class PatientDAO {
         return null;
     }
 
-    public void updatePatient(String userName) throws SQLException {
+    public Patient updatePatient(String userName) throws SQLException {
         Patient patient = getPatientByUsername(userName);
+
+        String userSql = """
+            UPDATE users SET
+            (first_name, last_name, day_of_birth, gender, phone_num, email, password) WHERE id = ?
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?) 
+            """;
+
+        String patientSql = """
+            UPDATE patient SET
+            (cpr) WHERE patient_id = ?
+            VALUES (?, ?)
+            """;
+
+        try (Connection connection = getConnection())
+        {
+            connection.setAutoCommit(false);
+
+            try
+            {
+                PreparedStatement userStatement = connection.prepareStatement(
+                        userSql,
+                        Statement.RETURN_GENERATED_KEYS
+                );
+
+                userStatement.setString(1, patient.getFirstName());
+                userStatement.setString(2, patient.getLastName());
+                userStatement.setObject(3, patient.getDayOfBirth());
+                userStatement.setString(4, patient.getGender());
+                userStatement.setString(5, patient.getPhoneNum());
+                userStatement.setString(6, patient.getEmail());
+                userStatement.setString(7, patient.getPassword());
+                userStatement.setInt(8, patient.getPatientID());
+
+                userStatement.executeUpdate();
+
+                ResultSet rs = userStatement.getGeneratedKeys();
+
+                int generatedUserId = -1;
+
+                if (rs.next())
+                {
+                    generatedUserId = rs.getInt(1);
+                }
+
+                PreparedStatement patientStatement = connection.prepareStatement(patientSql);
+
+                patientStatement.setString(1, patient.getCPR());
+                patientStatement.setInt(2, patient.getPatientID());
+
+                patientStatement.executeUpdate();
+
+                connection.commit();
+
+                return patient;
+            }
+            catch (Exception e)
+            {
+                connection.rollback();
+                throw e;
+            }
+        }
+
     }
 
     public ArrayList<Patient> getAllPatients() throws SQLException
@@ -172,14 +234,10 @@ public class PatientDAO {
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery())
+             )
         {
-            while (resultSet.next())
-            {
-                patients.add(extractPatient(resultSet));
-            }
+
         }
-        return patients;
     }
 
     private Patient extractPatient(ResultSet resultSet) throws SQLException

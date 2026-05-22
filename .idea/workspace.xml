@@ -4,55 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c33c4f7f-7bf6-4ee7-8274-b9a30b0b8481" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/client/view/functions/EditAppointmentWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/viewModel/appointment/EditAppointmentViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shared/RequestObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shared/ResponseObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/IntelliLang.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ea618b5a-ad66-4a17-960e-ae494a75cd47/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ea618b5a-ad66-4a17-960e-ae494a75cd47/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ea618b5a-ad66-4a17-960e-ae494a75cd47/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ea618b5a-ad66-4a17-960e-ae494a75cd47/storage_v2/_src_/database/postgres.edMnLQ/schema/viaclinic.dho2rQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/doctor/DoctorWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/doctor/DoctorWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/BookAppointmentWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/functions/BookAppointmentWindow.fxml" afterDir="false" />
+    <list default="true" id="c33c4f7f-7bf6-4ee7-8274-b9a30b0b8481" name="Changes" comment="a">
+      <change afterPath="$PROJECT_DIR$/src/client/view/patient/EditPatientWindowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/viewModel/patient/EditPatientViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/model/ClinicClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/model/ClinicClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/model/ClinicClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/model/ClinicClientProxy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/view/functions/BookAppointmentWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/functions/BookAppointmentWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/MyAppointmentWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/functions/MyAppointmentWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/MyAppointmentWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/functions/MyAppointmentWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/login/LoginWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/login/LoginWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/login/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/login/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/login/ViewHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/login/ViewHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/patient/PatientWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/PatientWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/appointment/BookAppointmentViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/appointment/BookAppointmentViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/appointment/MyAppointmentViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/appointment/MyAppointmentViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/CreateAccountViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/CreateAccountViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/DoctorViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/DoctorViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/LoginViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/LoginViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/MainViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/MainViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/PatientViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/PatientViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/ReceptionistViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/ReceptionistViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/view/functions/EditAppointmentWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/functions/EditAppointmentWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/ViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/ViewModelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/auth/LoginAuthenticator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/auth/LoginAuthenticator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/AppointmentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/Email.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/PatientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/PatientDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/Receptionist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/Receptionist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/TestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/TestData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/UserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/UserHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/UserHandlerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/UserHandlerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/AppointmentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/AppointmentDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/DoctorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/DoctorDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/service/ClinicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/ClinicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/service/ClinicServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/ClinicServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shared/PatientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/PatientDTO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,12 +39,75 @@
     &quot;assignee&quot;: &quot;AaeoO362304&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/AaeoO362304/viaclinic.git&quot;,
-    &quot;accountId&quot;: &quot;b8bd7b35-6c89-40a3-809a-49a474cc612a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AaeoO362304/viaclinic.git",
+    "accountId": "97d0e41a-be46-44bf-8b75-7f7c8d0a164b"
   }
-}</component>
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.7263349151787666E-4" />
+      <entry key="MS500" value="0.17854428604445508" />
+      <entry key="S2" value="0.8534740458474819" />
+      <entry key="S5" value="1.3943197370602387" />
+      <entry key="S10" value="1.9815577045555803" />
+      <entry key="S30" value="5.3127311470704806" />
+      <entry key="S60" value="10.360155626375162" />
+      <entry key="M2" value="19.684192338611204" />
+      <entry key="M5" value="43.5918643116778" />
+      <entry key="M10" value="70.05505104725032" />
+      <entry key="M15" value="86.71514105195192" />
+      <entry key="M30" value="112.69567659786135" />
+      <entry key="H1" value="132.6134443704797" />
+      <entry key="H2" value="145.93116402538521" />
+      <entry key="H4" value="153.8877167249279" />
+      <entry key="D1" value="161.38905122207044" />
+      <entry key="W1" value="162.76742640245413" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.000019048012526" />
+      <entry key="MS500" value="1.1145136582753699" />
+      <entry key="S2" value="1.849107352900627" />
+      <entry key="S5" value="2.6971955672167702" />
+      <entry key="S10" value="3.2516186614615106" />
+      <entry key="S30" value="5.066067248157292" />
+      <entry key="S60" value="9.961796007868003" />
+      <entry key="M2" value="22.176949660140124" />
+      <entry key="M5" value="50.89565198096305" />
+      <entry key="M10" value="80.57864786697601" />
+      <entry key="M15" value="99.80563811454198" />
+      <entry key="M30" value="130.5596675738627" />
+      <entry key="H1" value="153.6895460925635" />
+      <entry key="H2" value="168.37963030757118" />
+      <entry key="H4" value="176.76875752480086" />
+      <entry key="D1" value="184.39730561072523" />
+      <entry key="W1" value="185.76939007643017" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.01011636156929808" />
+      <entry key="MS500" value="0.5901379920404733" />
+      <entry key="S2" value="2.1983329937292475" />
+      <entry key="S5" value="3.7581193715869556" />
+      <entry key="S10" value="5.003816139557564" />
+      <entry key="S30" value="10.203730294616609" />
+      <entry key="S60" value="20.124271805121435" />
+      <entry key="M2" value="41.62594787803568" />
+      <entry key="M5" value="94.25573547997239" />
+      <entry key="M10" value="150.44582363426716" />
+      <entry key="M15" value="186.36590012775102" />
+      <entry key="M30" value="243.1551840639798" />
+      <entry key="H1" value="286.24459588207174" />
+      <entry key="H2" value="314.2789771880095" />
+      <entry key="H4" value="330.639818160216" />
+      <entry key="D1" value="345.7834674055537" />
+      <entry key="W1" value="348.53640078643457" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -90,32 +116,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MVVM_Observer_Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestData.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/insan/Desktop/Schule/Uni/VIAClinicumdas&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MVVM_Observer_Main.executor": "Run",
+    "Application.TestData.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/insan/Desktop/Schule/Uni/VIAClinicumdas",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
       </set>
     </attachedChunks>
   </component>
@@ -129,10 +156,24 @@
       <workItem from="1779400608083" duration="654000" />
       <workItem from="1779401315014" duration="561000" />
       <workItem from="1779401893091" duration="13424000" />
+      <workItem from="1779455845180" duration="6122000" />
     </task>
+    <task id="LOCAL-00001" summary="a">
+      <option name="closed" value="true" />
+      <created>1779455882795</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1779455882795</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
 </project>

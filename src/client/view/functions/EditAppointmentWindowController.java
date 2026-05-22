@@ -105,18 +105,9 @@ public class EditAppointmentWindowController {
         LocalTime time = LocalTime.now();
         LocalDate date = LocalDate.now();
 
-        if (datePicker.getValue() == null || !datePicker.getValue().equals(date)) {
-            timeComboBox.setItems(
-                    FXCollections.observableArrayList(
-                            "10:00", "11:00", "12:00",
-                            "13:00", "14:00", "15:00",
-                            "16:00", "17:00", "18:00"
-                    )
-            );
-        }
-        else{
-            for (int i = 0; i < i - time.getHour(); i++) {
-                int x = 18 - i;
+        if (datePicker.getValue().equals(date)){
+            for (int i = 0; i < 18 - time.getHour(); i++) {
+                int x = 18-i;
                 appointmentHours.add(x + ":00");
             }
 
@@ -126,6 +117,17 @@ public class EditAppointmentWindowController {
                     )
             );
         }
+
+        if (datePicker.getValue() == null || !datePicker.getValue().equals(date)) {
+            timeComboBox.setItems(
+                    FXCollections.observableArrayList(
+                            "10:00", "11:00", "12:00",
+                            "13:00", "14:00", "15:00",
+                            "16:00", "17:00", "18:00"
+                    )
+            );
+        }
+
     }
 
 

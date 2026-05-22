@@ -4,6 +4,7 @@ import client.model.ClinicClient;
 import client.viewModel.appointment.BookAppointmentViewModel;
 import client.viewModel.appointment.EditAppointmentViewModel;
 import client.viewModel.appointment.MyAppointmentViewModel;
+import client.viewModel.patient.EditPatientViewModel;
 import shared.AppointmentDTO;
 
 public class ViewModelFactory {
@@ -16,6 +17,7 @@ public class ViewModelFactory {
     private final BookAppointmentViewModel bookAppointmentViewModel;
     private final MyAppointmentViewModel myAppointmentViewModel;
     private final EditAppointmentViewModel editAppointmentViewModel;
+    private final EditPatientViewModel editPatientViewModel;
 
     public ViewModelFactory(ClinicClient client) {
         createAccountViewModel = new CreateAccountViewModel(client);
@@ -27,6 +29,7 @@ public class ViewModelFactory {
         bookAppointmentViewModel = new BookAppointmentViewModel(client, patientViewModel, doctorViewModel);
         myAppointmentViewModel = new MyAppointmentViewModel(client, patientViewModel);
         editAppointmentViewModel = new EditAppointmentViewModel(client, new AppointmentDTO());
+        editPatientViewModel = new EditPatientViewModel(client, patientViewModel);
     }
 
     public CreateAccountViewModel getCreateAccountViewModel() { return createAccountViewModel; }

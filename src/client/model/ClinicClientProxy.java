@@ -33,6 +33,11 @@ public class ClinicClientProxy implements ClinicClient {
     public PatientDTO createPatient(PatientDTO patient) throws Exception { return service.createPatient(patient); }
 
     @Override
+    public PatientDTO updatePatient(PatientDTO patientDTO) throws Exception {
+        return service.updatePatient(patientDTO);
+    }
+
+    @Override
     public DoctorDTO createDoctor(DoctorDTO doctor) throws Exception { return service.createDoctor(doctor); }
 
     @Override
@@ -46,6 +51,11 @@ public class ClinicClientProxy implements ClinicClient {
 
     @Override
     public ArrayList<ReceptionistDTO> getAllReceptionists() throws Exception { return service.getAllReceptionists(); }
+
+    @Override
+    public PatientDTO getPatientById(int patientId) throws Exception {
+        return service.getPatientById(patientId);
+    }
 
     @Override
     public AppointmentDTO createAppointment(int patientId, int doctorId, LocalDateTime date, boolean status, String notes) throws Exception {

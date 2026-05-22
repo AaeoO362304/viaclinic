@@ -12,12 +12,15 @@ public interface ClinicService {
     void logout();
 
     PatientDTO createPatient(PatientDTO patient) throws SQLException;
+    PatientDTO updatePatient(PatientDTO patient) throws SQLException;
     DoctorDTO createDoctor(DoctorDTO doctor) throws SQLException;
     ReceptionistDTO createReceptionist(ReceptionistDTO receptionist) throws SQLException;
 
     ArrayList<PatientDTO> getAllPatients() throws SQLException;
     ArrayList<DoctorDTO> getAllDoctors() throws SQLException;
     ArrayList<ReceptionistDTO> getAllReceptionists() throws SQLException;
+
+    PatientDTO getPatientById(int patientId) throws SQLException;
 
     AppointmentDTO createAppointment(int patientId, int doctorId, LocalDateTime date, boolean status, String notes) throws SQLException;
     AppointmentDTO updateAppointment(int appointmentId, int doctorId, LocalDateTime date) throws SQLException;

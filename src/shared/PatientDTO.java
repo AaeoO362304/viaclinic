@@ -38,6 +38,8 @@ public class PatientDTO {
         this.age = age;
     }
 
+
+
     public int getPatientID() { return patientID; }
     public LocalDate getDayOfBirth() { return dayOfBirth; }
     public LocalDate getLastVisit() { return lastVisit; }
