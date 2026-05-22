@@ -1,41 +1,43 @@
 package client.viewModel.login;
 
+import client.model.ClinicClient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import server.model.auth.AuthenticationException;
-import server.model.auth.LoginService;
-import server.model.auth.LoginProxy;
-import server.model.auth.Role;
-import server.model.auth.Session;
-import server.model.bookAppointment.UserHandler;
+import shared.RoleDTO;
+import shared.SessionDTO;
 
 public class LoginViewModel {
-    private final UserHandler handler;
-    private final LoginService auth;
-    private Session currentSession;
+    private final ClinicClient client;
+    private SessionDTO currentSession;
 
     private final StringProperty username = new SimpleStringProperty("");
     private final StringProperty password = new SimpleStringProperty("");
-    private final StringProperty error    = new SimpleStringProperty("");
+    private final StringProperty error = new SimpleStringProperty("");
 
-    public LoginViewModel(UserHandler handler) {
-        this.handler = handler;
-        this.auth = new LoginProxy();
+    public LoginViewModel(ClinicClient client) {
+        this.client = client;
     }
 
-    public Role login()
-    {
+    public RoleDTO login() {
         error.set("");
-        try
-        {
-            currentSession = auth.login(username.get(), password.get());
-            return currentSession.getRole();
+        try {
+            currentSession = client.login(username.get(), password.get());
+            return currentSession == null ? null : currentSession.getRole();
         }
-        catch (AuthenticationException e)
-        {
-            error.set(e.getMessage());
+        catch (Exception e) {
+            error.set(e.getMessage() == null ? "Login failed." : e.getMessage());
             return null;
         }
+    }
+
+    public void logout() {
+        try {
+            client.logout();
+        }
+        catch (Exception e) {
+            error.set(e.getMessage() == null ? "Logout failed." : e.getMessage());
+        }
+        currentSession = null;
     }
 
     public void clear() {
@@ -44,14 +46,8 @@ public class LoginViewModel {
         error.set("");
     }
 
-    public Session getCurrentSession()
-    {
-        return currentSession;
-    }
-
+    public SessionDTO getCurrentSession() { return currentSession; }
     public StringProperty getUsernameProperty() { return username; }
     public StringProperty getPasswordProperty() { return password; }
-    public StringProperty getErrorProperty()    { return error; }
-
-    public LoginService getAuthService() { return auth; }
+    public StringProperty getErrorProperty() { return error; }
 }

@@ -53,8 +53,8 @@ public class TestData {
                     doctorGender,
                     doctorPhoneNumber,
                     doctorDayOfBirth,
-                    specialization,
-                    doctorUserName
+                    doctorUserName,
+                    specialization
             );
 
             databaseDoctorDAO.createDoctor(doctor);

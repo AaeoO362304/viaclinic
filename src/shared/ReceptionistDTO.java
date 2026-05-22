@@ -2,8 +2,8 @@ package shared;
 
 import java.time.LocalDate;
 
-public class DoctorDTO {
-    private int doctorID;
+public class ReceptionistDTO {
+    private int receptionistID;
     private String firstName;
     private String lastName;
     private String email;
@@ -11,16 +11,16 @@ public class DoctorDTO {
     private String userName;
     private String password;
     private String gender;
-    private String specialization;
     private LocalDate dayOfBirth;
     private int age;
 
-    public DoctorDTO() {}
+    public ReceptionistDTO() {}
 
-    public DoctorDTO(int doctorID, String firstName, String lastName, String email,
-                     String phoneNumber, String userName, String password,
-                     String gender, String specialization, LocalDate dayOfBirth, int age) {
-        this.doctorID = doctorID;
+    public ReceptionistDTO(int receptionistID, String firstName, String lastName,
+                           String email, String phoneNumber, String userName,
+                           String password, String gender, LocalDate dayOfBirth,
+                           int age) {
+        this.receptionistID = receptionistID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -28,13 +28,12 @@ public class DoctorDTO {
         this.userName = userName;
         this.password = password;
         this.gender = gender;
-        this.specialization = specialization;
         this.dayOfBirth = dayOfBirth;
         this.age = age;
     }
 
-    public int getDoctorID() { return doctorID; }
-    public void setDoctorID(int doctorID) { this.doctorID = doctorID; }
+    public int getReceptionistID() { return receptionistID; }
+    public void setReceptionistID(int receptionistID) { this.receptionistID = receptionistID; }
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public String getLastName() { return lastName; }
@@ -49,8 +48,6 @@ public class DoctorDTO {
     public void setPassword(String password) { this.password = password; }
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
-    public String getSpecialization() { return specialization; }
-    public void setSpecialization(String specialization) { this.specialization = specialization; }
     public LocalDate getDayOfBirth() { return dayOfBirth; }
     public void setDayOfBirth(LocalDate dayOfBirth) { this.dayOfBirth = dayOfBirth; }
     public int getAge() { return age; }
@@ -58,7 +55,6 @@ public class DoctorDTO {
 
     @Override
     public String toString() {
-        String name = ((firstName == null ? "" : firstName) + " " + (lastName == null ? "" : lastName)).trim();
-        return name;
+        return ((firstName == null ? "" : firstName) + " " + (lastName == null ? "" : lastName)).trim();
     }
 }

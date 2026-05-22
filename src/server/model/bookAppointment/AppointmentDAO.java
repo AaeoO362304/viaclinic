@@ -7,47 +7,47 @@ import java.util.ArrayList;
 public class AppointmentDAO {
     private static AppointmentDAO instance;
 
-    private AppointmentDAO() throws SQLException
-    {
+    private AppointmentDAO() throws SQLException {
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
-    public static synchronized  AppointmentDAO getInstance() throws SQLException
-    {
-        if (instance==null)
-        {
+    public static synchronized AppointmentDAO getInstance() throws SQLException {
+        if (instance == null) {
             instance = new AppointmentDAO();
         }
         return instance;
     }
 
-    private static Connection getConnection() throws SQLException
-    {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=viaclinic",
+    private static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(
+                "jdbc:postgresql://localhost:5432/postgres?currentSchema=viaclinic",
                 "postgres", "362304");
     }
 
     public Appointment create(Patient patient, Doctor doctor, LocalDateTime date, boolean status, String notes) throws SQLException {
-        try (Connection connection = getConnection())
-        {
-            PreparedStatement statement= connection.prepareStatement("INSERT INTO Appointment(patient_id,doctor_id,appointment_date,status,notes) VALUES(?,?,?,?,?)",
-                    Statement.RETURN_GENERATED_KEYS);
-            LocalDateTime localDateTime = date;
+        String sql = """
+            INSERT INTO appointment(patient_id, doctor_id, appointment_date, status, notes)
+            VALUES (?, ?, ?, ?, ?)
+            """;
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
             statement.setInt(1, patient.getPatientID());
             statement.setInt(2, doctor.getDoctorID());
-            statement.setTimestamp(3, Timestamp.valueOf(localDateTime));
+            statement.setTimestamp(3, Timestamp.valueOf(date));
             statement.setBoolean(4, status);
             statement.setString(5, notes);
-
             statement.executeUpdate();
 
-            ResultSet rs = statement.getGeneratedKeys();
-            int generatedID=-1;
-            if (rs.next())
-            {
-                generatedID=rs.getInt(1);
+            int generatedID = -1;
+            try (ResultSet rs = statement.getGeneratedKeys()) {
+                if (rs.next()) {
+                    generatedID = rs.getInt(1);
+                }
             }
-            Appointment appointment = new Appointment(patient, doctor, date);
+
+            Appointment appointment = new Appointment(patient, doctor, date, status, notes);
             appointment.setAppointmentID(generatedID);
             return appointment;
         }
@@ -55,114 +55,107 @@ public class AppointmentDAO {
 
     public ArrayList<Appointment> getAppointmentsByPatientId(int patientID) throws SQLException {
         ArrayList<Appointment> appointments = new ArrayList<>();
+        String sql = """
+            SELECT appointment_id, patient_id, doctor_id, appointment_date, status, notes
+            FROM appointment
+            WHERE patient_id = ?
+            ORDER BY appointment_date
+            """;
 
-        try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT appointment_id, patient_id, doctor_id, appointment_date, status, notes FROM Appointment WHERE patient_id = ?");
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
             statement.setInt(1, patientID);
-
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                int appointmentID = rs.getInt("appointment_id");
-                Timestamp timestamp = rs.getTimestamp("appointment_date");
-                int doctorId = rs.getInt("doctor_id");
-                boolean status = rs.getBoolean("status");
-                String notes = rs.getString("notes");
-                LocalDateTime date = timestamp.toLocalDateTime();
-
-                Doctor doctor = DoctorDAO.getInstance().getDoctorById(doctorId);
-                Patient patient = PatientDAO.getInstance().getPatientById(patientID);
-                Appointment appointment = new Appointment(patient, doctor, date, status, notes);
-                Patient patient1 = PatientDAO.getInstance().getPatientById(patientID);
-                appointment.setPatient(patient1);
-                appointment.setAppointmentID(appointmentID);
-                appointments.add(appointment);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    appointments.add(extractAppointment(rs));
+                }
             }
         }
-
         return appointments;
     }
 
     public ArrayList<Appointment> getAppointmentsByDoctorId(int doctorID) throws SQLException {
         ArrayList<Appointment> appointments = new ArrayList<>();
+        String sql = """
+            SELECT appointment_id, patient_id, doctor_id, appointment_date, status, notes
+            FROM appointment
+            WHERE doctor_id = ?
+            ORDER BY appointment_date
+            """;
 
-        try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT appointment_id, patient_id, doctor_id, appointment_date, status, notes FROM Appointment WHERE doctor_id = ?");
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
             statement.setInt(1, doctorID);
-
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                int appointmentID = rs.getInt("appointment_id");
-                Timestamp timestamp = rs.getTimestamp("appointment_date");
-                int patientId = rs.getInt("patient_id");
-                boolean status = rs.getBoolean("status");
-                String notes = rs.getString("notes");
-                LocalDateTime date = timestamp.toLocalDateTime();
-
-                Doctor doctor = DoctorDAO.getInstance().getDoctorById(doctorID);
-                Patient patient = PatientDAO.getInstance().getPatientById(patientId);
-                Appointment appointment = new Appointment(patient, doctor, date, status, notes);
-                Doctor doctor1 = DoctorDAO.getInstance().getDoctorById(doctorID);
-                appointment.setDoctor(doctor1);
-                appointment.setAppointmentID(appointmentID);
-                appointments.add(appointment);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    appointments.add(extractAppointment(rs));
+                }
             }
         }
-
         return appointments;
     }
 
-
-    public boolean deleteAppointment(int appointmentId) throws SQLException
-    {
-        try (Connection connection = getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(
-                    "DELETE FROM Appointment WHERE appointment_id = ?");
+    public boolean deleteAppointment(int appointmentId) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM appointment WHERE appointment_id = ?")) {
             statement.setInt(1, appointmentId);
-            int affectedRows = statement.executeUpdate();
-            return affectedRows == 1;
+            return statement.executeUpdate() == 1;
         }
     }
 
     public Appointment updateAppointment(int appointmentId, LocalDateTime date, int newDoctorId) throws SQLException {
-        String sql = "UPDATE Appointment SET date = ?, doctor_id=? WHERE appointment_id = ?";
+        String sql = "UPDATE appointment SET appointment_date = ?, doctor_id = ? WHERE appointment_id = ?";
 
         try (Connection connection = getConnection();
-        PreparedStatement statement = getConnection().prepareStatement(sql))
-        {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
             statement.setTimestamp(1, Timestamp.valueOf(date));
             statement.setInt(2, newDoctorId);
             statement.setInt(3, appointmentId);
 
-            int rowsUpdated = statement.executeUpdate();
-
-            if (rowsUpdated>0)
-            {
-                String fetchSql = "SELECT patient_id, doctor_id, appointment_date, status, notes FROM Appointment WHERE appointment_id = ?";
-                try (PreparedStatement fetchStatement = connection.prepareStatement(fetchSql))
-                {
-                    fetchStatement.setInt(1, appointmentId);
-                    ResultSet rs = fetchStatement.executeQuery();
-                    if (rs.next())
-                    {
-                        Timestamp timestamp = rs.getTimestamp("date");
-                        int patientId = rs.getInt("patient_id");
-                        int doctorId = rs.getInt("doctor_id");
-                        boolean status = rs.getBoolean("status");
-                        String notes = rs.getString("notes");
-
-                        Doctor doctor = DoctorDAO.getInstance().getDoctorById(doctorId);
-                        Patient patient = PatientDAO.getInstance().getPatientById(patientId);
-
-                        Appointment updatedAppointment = new Appointment(patient, doctor, date, status, notes);
-                        updatedAppointment.setPatient(patient);
-                        updatedAppointment.setAppointmentID(appointmentId);
-                        return updatedAppointment;
-                    }
-                }
+            if (statement.executeUpdate() > 0) {
+                return getAppointmentById(appointmentId);
             }
             return null;
         }
     }
 
+    public Appointment getAppointmentById(int appointmentId) throws SQLException {
+        String sql = """
+            SELECT appointment_id, patient_id, doctor_id, appointment_date, status, notes
+            FROM appointment
+            WHERE appointment_id = ?
+            """;
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, appointmentId);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return extractAppointment(rs);
+                }
+            }
+        }
+        return null;
     }
+
+    private Appointment extractAppointment(ResultSet rs) throws SQLException {
+        int appointmentID = rs.getInt("appointment_id");
+        int patientId = rs.getInt("patient_id");
+        int doctorId = rs.getInt("doctor_id");
+        Timestamp timestamp = rs.getTimestamp("appointment_date");
+        LocalDateTime date = timestamp == null ? null : timestamp.toLocalDateTime();
+        boolean status = rs.getBoolean("status");
+        String notes = rs.getString("notes");
+
+        Patient patient = PatientDAO.getInstance().getPatientById(patientId);
+        Doctor doctor = DoctorDAO.getInstance().getDoctorById(doctorId);
+
+        Appointment appointment = new Appointment(patient, doctor, date, status, notes);
+        appointment.setAppointmentID(appointmentID);
+        return appointment;
+    }
+}

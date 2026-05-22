@@ -1,0 +1,156 @@
+package server.service;
+
+import server.model.auth.Role;
+import server.model.auth.Session;
+import server.model.bookAppointment.*;
+import shared.*;
+
+public class DTOMapper {
+    public static RoleDTO toRoleDTO(Role role) {
+        if (role == null) return null;
+        return switch (role) {
+            case PATIENT -> RoleDTO.PATIENT;
+            case DOCTOR -> RoleDTO.DOCTOR;
+            case RECEPTIONIST -> RoleDTO.RECEPTIONIST;
+        };
+    }
+
+    public static SessionDTO toSessionDTO(Session session) {
+        if (session == null || session.getUser() == null) return null;
+
+        int userId = 0;
+        if (session.getUser() instanceof Patient patient) {
+            userId = patient.getPatientID();
+        }
+        else if (session.getUser() instanceof Doctor doctor) {
+            userId = doctor.getDoctorID();
+        }
+        else if (session.getUser() instanceof Receptionist receptionist) {
+            userId = receptionist.getReceptionistID();
+        }
+
+        return new SessionDTO(
+                userId,
+                session.getUser().getFirstName(),
+                session.getUser().getLastName(),
+                session.getUser().getUserName(),
+                toRoleDTO(session.getRole())
+        );
+    }
+
+    public static PatientDTO toPatientDTO(Patient patient) {
+        if (patient == null) return null;
+        return new PatientDTO(
+                patient.getPatientID(),
+                patient.getFirstName(),
+                patient.getLastName(),
+                patient.getEmail(),
+                patient.getPhoneNum(),
+                patient.getUserName(),
+                patient.getCPR(),
+                patient.getGender(),
+                patient.getPassword(),
+                patient.getMedicalNotes(),
+                patient.getLastVisit(),
+                patient.getDayOfBirth(),
+                patient.getAge()
+        );
+    }
+
+    public static Patient toPatient(PatientDTO dto) {
+        if (dto == null) return null;
+        Patient patient = new Patient(
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getPassword(),
+                dto.getEmail(),
+                dto.getGender(),
+                dto.getPhoneNumber(),
+                dto.getDayOfBirth(),
+                dto.getUserName(),
+                dto.getCPR()
+        );
+        patient.setPatientID(dto.getPatientID());
+        patient.setMedicalNotes(dto.getMedicalNotes());
+        patient.setLastVisit(dto.getLastVisit());
+        return patient;
+    }
+
+    public static DoctorDTO toDoctorDTO(Doctor doctor) {
+        if (doctor == null) return null;
+        return new DoctorDTO(
+                doctor.getDoctorID(),
+                doctor.getFirstName(),
+                doctor.getLastName(),
+                doctor.getEmail(),
+                doctor.getPhoneNum(),
+                doctor.getUserName(),
+                doctor.getPassword(),
+                doctor.getGender(),
+                doctor.getSpecialization(),
+                doctor.getDayOfBirth(),
+                doctor.getAge()
+        );
+    }
+
+    public static Doctor toDoctor(DoctorDTO dto) {
+        if (dto == null) return null;
+        Doctor doctor = new Doctor(
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getPassword(),
+                dto.getEmail(),
+                dto.getGender(),
+                dto.getPhoneNumber(),
+                dto.getDayOfBirth(),
+                dto.getUserName(),
+                dto.getSpecialization()
+        );
+        doctor.setDoctorID(dto.getDoctorID());
+        return doctor;
+    }
+
+    public static ReceptionistDTO toReceptionistDTO(Receptionist receptionist) {
+        if (receptionist == null) return null;
+        return new ReceptionistDTO(
+                receptionist.getReceptionistID(),
+                receptionist.getFirstName(),
+                receptionist.getLastName(),
+                receptionist.getEmail(),
+                receptionist.getPhoneNum(),
+                receptionist.getUserName(),
+                receptionist.getPassword(),
+                receptionist.getGender(),
+                receptionist.getDayOfBirth(),
+                receptionist.getAge()
+        );
+    }
+
+    public static Receptionist toReceptionist(ReceptionistDTO dto) {
+        if (dto == null) return null;
+        Receptionist receptionist = new Receptionist(
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getPassword(),
+                dto.getEmail(),
+                dto.getGender(),
+                dto.getPhoneNumber(),
+                dto.getDayOfBirth(),
+                dto.getUserName()
+        );
+        receptionist.setReceptionistID(dto.getReceptionistID());
+        return receptionist;
+    }
+
+    public static AppointmentDTO toAppointmentDTO(Appointment appointment) {
+        if (appointment == null) return null;
+        return new AppointmentDTO(
+                appointment.getAppointmentID(),
+                appointment.getDate(),
+                toDoctorDTO(appointment.getDoctor()),
+                toPatientDTO(appointment.getPatient()),
+                appointment.isStatus(),
+                appointment.getNotes()
+        );
+    }
+}

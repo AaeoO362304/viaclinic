@@ -152,11 +152,28 @@ public class PatientDAO {
     public ArrayList<Patient> getAllPatients() throws SQLException
     {
         ArrayList<Patient> patients = new ArrayList<>();
-        try (Connection connection = getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Patient");
-            ResultSet resultSet = statement.executeQuery();
+        String sql = """
+            SELECT
+                p.patient_id,
+                p.last_visit,
+                p.medical_notes,
+                p.cpr,
+                u.first_name,
+                u.last_name,
+                u.day_of_birth,
+                u.gender,
+                u.phone_num,
+                u.email,
+                u.password,
+                u.username
+            FROM patient p
+            JOIN users u ON p.patient_id = u.id
+            """;
 
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery())
+        {
             while (resultSet.next())
             {
                 patients.add(extractPatient(resultSet));

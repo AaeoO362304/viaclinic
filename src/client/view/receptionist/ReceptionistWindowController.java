@@ -1,13 +1,12 @@
 package client.view.receptionist;
 
 import client.view.login.ViewHandler;
-import client.viewModel.login.DoctorViewModel;
 import client.viewModel.login.ReceptionistViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import server.model.auth.Session;
+import shared.SessionDTO;
 
 public class ReceptionistWindowController {
 
@@ -25,21 +24,23 @@ public class ReceptionistWindowController {
     private ViewHandler viewHandler;
 
     public void init(ViewHandler viewHandler,
-                     ReceptionistViewModel viewModel, Region root, Session currentSession){
+                     ReceptionistViewModel viewModel, Region root, SessionDTO currentSession){
         this.viewModel = viewModel;
         this.viewHandler = viewHandler;
         this.root = root;
 
-        receptionistLabel.setText("Receptionist: " + currentSession.getDisplayName());
+        setLabel(currentSession);
     }
 
     public void logOutButtonPressed() {
-        viewModel.getLoginViewModel().getAuthService().logout();
+        viewModel.getLoginViewModel().logout();
+        viewHandler.setCurrentSession(null);
         viewHandler.openView("main");
     }
 
     public void closeButtonPressed() {
-        viewModel.getLoginViewModel().getAuthService().logout();
+        viewModel.getLoginViewModel().logout();
+        viewHandler.setCurrentSession(null);
         viewHandler.closeView();
     }
 
@@ -59,9 +60,15 @@ public class ReceptionistWindowController {
         viewHandler.openView("registered_patients");
     }
 
+    private void setLabel(SessionDTO session)
+    {
+        receptionistLabel.setText("Receptionist: " + (session == null ? "" : session.getDisplayName()));
+    }
+
     public void reset()
     {
         viewModel.clear();
+        setLabel(viewHandler.getCurrentSession());
     }
 
     public Region getRoot()

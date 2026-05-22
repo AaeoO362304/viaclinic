@@ -5,7 +5,9 @@ import client.viewModel.login.DoctorViewModel;
 import client.viewModel.login.PatientViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.AppointmentDTO;
 import shared.DoctorDTO;
+import shared.PatientDTO;
 import shared.SessionDTO;
 
 import java.time.LocalDate;
@@ -13,9 +15,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class BookAppointmentViewModel {
-    private final DoctorViewModel doctorViewModel;
-    private final PatientViewModel patientViewModel;
+public class EditAppointmentViewModel {
     private final ClinicClient client;
 
     private LocalDateTime appointmentDate;
@@ -23,15 +23,17 @@ public class BookAppointmentViewModel {
     private final StringProperty time;
     private final StringProperty error;
     private final StringProperty notes;
+    private AppointmentDTO appointment;
     private DoctorDTO doctor;
+    private PatientDTO patient;
     private boolean status;
 
-    public BookAppointmentViewModel(ClinicClient client,
-                                    PatientViewModel patientViewModel,
-                                    DoctorViewModel doctorViewModel) {
+    public EditAppointmentViewModel(ClinicClient client, AppointmentDTO appointment
+                                    ) {
         this.client = client;
-        this.patientViewModel = patientViewModel;
-        this.doctorViewModel = doctorViewModel;
+        this.appointment=appointment;
+        this.doctor=appointment.getDoctor();
+        this.patient=appointment.getPatient();
         this.time = new SimpleStringProperty("");
         this.notes = new SimpleStringProperty("");
         this.error = new SimpleStringProperty("");
@@ -47,7 +49,7 @@ public class BookAppointmentViewModel {
         appointmentDate = LocalDateTime.of(date, localTime);
     }
 
-    public boolean create() {
+    public boolean update() {
         error.set("");
 
         try {
@@ -56,15 +58,8 @@ public class BookAppointmentViewModel {
             if (doctor == null) { error.set("Please select a doctor."); return false; }
             if (time.get() == null || time.get().isBlank()) { error.set("Please select a time for your appointment."); return false; }
 
-            SessionDTO session = patientViewModel.getLoginViewModel().getCurrentSession();
-            if (session == null || session.getUserId() <= 0) {
-                error.set("No patient is logged in.");
-                return false;
-            }
-
             createLocalDateTime(date, time.get());
-            client.createAppointment(session.getUserId(), doctor.getDoctorID(), appointmentDate, status, notes.get());
-            System.out.println("Appointment created successfully");
+            client.updateAppointment(appointment.getId(), doctor.getDoctorID(),  appointmentDate);
             return true;
         }
         catch (Exception e) {
@@ -80,13 +75,13 @@ public class BookAppointmentViewModel {
         date = null;
         appointmentDate = null;
         doctor = null;
+        patient=null;
         status = false;
     }
 
     public void setDate(LocalDate date) { this.date = date; }
     public void setDoctor(DoctorDTO doctor) { this.doctor = doctor; }
-    public DoctorViewModel getDoctorViewModel() { return doctorViewModel; }
-    public PatientViewModel getPatientViewModel() { return patientViewModel; }
+    public void setAppointment(AppointmentDTO appointment) {this.appointment=appointment;}
     public StringProperty getTimeProperty() { return time; }
     public StringProperty getNotesProperty() { return notes; }
     public StringProperty getErrorProperty() { return error; }

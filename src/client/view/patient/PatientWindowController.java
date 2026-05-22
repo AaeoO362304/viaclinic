@@ -1,16 +1,12 @@
 package client.view.patient;
 
 import client.view.login.ViewHandler;
-import client.viewModel.login.DoctorViewModel;
 import client.viewModel.login.PatientViewModel;
+import shared.SessionDTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import server.model.auth.LoginAuthenticator;
-import server.model.auth.LoginProxy;
-import server.model.auth.Session;
-import server.model.bookAppointment.Patient;
 
 public class PatientWindowController {
 
@@ -29,16 +25,17 @@ public class PatientWindowController {
     private ViewHandler viewHandler;
 
     public void init(ViewHandler viewHandler,
-                     PatientViewModel viewModel, Region root, Session currentSession){
+                     PatientViewModel viewModel, Region root, SessionDTO currentSession){
         this.viewModel = viewModel;
         this.viewHandler = viewHandler;
         this.root = root;
 
-        patientLabel.setText("Patient: " + currentSession.getDisplayName());
+        setLabel(currentSession);
     }
 
     public void logOutButtonPressed() {
-        viewModel.getLoginViewModel().getAuthService().logout();
+        viewModel.getLoginViewModel().logout();
+        viewHandler.setCurrentSession(null);
         viewHandler.openView("main");
     }
 
@@ -66,9 +63,15 @@ public class PatientWindowController {
         viewHandler.openView("chat");
     }
 
+    private void setLabel(SessionDTO session)
+    {
+        patientLabel.setText("Patient: " + (session == null ? "" : session.getDisplayName()));
+    }
+
     public void reset()
     {
         viewModel.clear();
+        setLabel(viewHandler.getCurrentSession());
     }
 
     public Region getRoot()

@@ -14,13 +14,15 @@ public class UserHandlerManager implements UserHandler{
   public UserHandlerManager()
         {
             patientList = new PatientList();
+            doctorList = new DoctorList();
+            receptionistList = new ReceptionistList();
             property = new PropertyChangeSupport(this);
         }
 
         @Override public void addPatient(String firstName, String lastName, String gender, String phoneNum, String email, String password, LocalDate dateOfBirth, String CPR, String userName)
       throws IllegalArgumentException, IllegalStateException
         {
-            Patient patient = new Patient(firstName, lastName, gender, phoneNum, email, password, dateOfBirth, CPR, userName);
+            Patient patient = new Patient(firstName, lastName, password, email, gender, phoneNum, dateOfBirth, userName, CPR);
             patientList.addPatient(patient);
             property.firePropertyChange("Patient", null, patient);
         }
@@ -39,12 +41,12 @@ public class UserHandlerManager implements UserHandler{
             return patientList.size();
         }
 
-        @Override public void addListener(PropertyChangeListener listener)
+        public void addListener(PropertyChangeListener listener)
         {
             property.addPropertyChangeListener(listener);
         }
 
-        @Override public void removeListener(PropertyChangeListener listener)
+        public void removeListener(PropertyChangeListener listener)
         {
             property.removePropertyChangeListener(listener);
         }

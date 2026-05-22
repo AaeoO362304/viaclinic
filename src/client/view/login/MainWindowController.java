@@ -2,12 +2,10 @@ package client.view.login;
 
 import client.viewModel.login.CreateAccountViewModel;
 import client.viewModel.login.MainViewModel;
-import com.sun.tools.javac.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 
-import javax.swing.*;
 
 public class MainWindowController {
 

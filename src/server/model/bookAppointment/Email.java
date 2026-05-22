@@ -142,7 +142,7 @@ public class Email
      */
     public static boolean isLegal(String emailAddress)
     {
-        return legalEmailAddress(emailAddress) != null;
+        return legalEmailAddress(emailAddress) == null;
     }
 
     /**
@@ -197,6 +197,11 @@ public class Email
      */
     public static String legalEmailAddress(String address)
     {
+        if (address == null || address.isBlank())
+        {
+            return "Email cannot be empty.";
+        }
+
         String[] split = address.split("@");
         if (split.length < 2)
         {

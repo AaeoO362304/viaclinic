@@ -10,8 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
-import server.model.auth.Role;
-import server.model.auth.Session;
+import shared.RoleDTO;
 
 public class LoginWindowController {
     @FXML private Text idText;
@@ -50,21 +49,21 @@ public class LoginWindowController {
     @FXML
     private void loginButtonPressed()
     {
-        Role role = viewModel.login();
+        RoleDTO role = viewModel.login();
 
         if (role!=null)
         {
             viewHandler.setCurrentSession(viewModel.getCurrentSession());
 
-            if (role == Role.PATIENT)
+            if (role == RoleDTO.PATIENT)
             {
                 viewHandler.openView("patient");
             }
-            else if (role == Role.DOCTOR)
+            else if (role == RoleDTO.DOCTOR)
             {
                 viewHandler.openView("doctor");
             }
-            else if (role == Role.RECEPTIONIST)
+            else if (role == RoleDTO.RECEPTIONIST)
             {
                 viewHandler.openView("receptionist");
             }
