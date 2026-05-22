@@ -23,6 +23,7 @@ public class EditPatientViewModel {
     private final StringProperty CPR;
     private final StringProperty userName;
     private LocalDate dayOfBirth;
+    private int patientId;
 
     private PatientViewModel patientViewModel;
 
@@ -60,15 +61,18 @@ public class EditPatientViewModel {
             if (firstName.get() == null || firstName.get().isBlank()) { error.set("Please enter your first name."); return false; }
             if (lastName.get() == null || lastName.get().isBlank()) { error.set("Please enter your last name."); return false; }
             if (gender.get() == null || gender.get().isBlank()) { error.set("Please choose a gender."); return false; }
-            if (dayOfBirth == null) { error.set("Please enter your birthday."); return false; }
             if (phoneNum.get() == null || phoneNum.get().isBlank()) { error.set("Please enter your phone number."); return false; }
             if (email.get() == null || email.get().isBlank()) { error.set("Please enter your email."); return false; }
             if (password.get() == null || password.get().isBlank()) { error.set("Please enter your password."); return false; }
             if (CPR.get() == null || CPR.get().isBlank()) { error.set("Please enter your CPR number."); return false; }
-            if (userName.get() == null || userName.get().isBlank()) { error.set("Please enter your username."); return false; }
+            if (patientId <= 0)
+            {
+                SessionDTO session = patientViewModel.getLoginViewModel().getCurrentSession();
+                patientId = session.getUserId();
+            }
 
             PatientDTO patient = new PatientDTO(
-                    0,
+                    patientId,
                     firstName.get(),
                     lastName.get(),
                     email.get(),
@@ -92,12 +96,46 @@ public class EditPatientViewModel {
         }
     }
 
-    public PatientDTO getPatientById(int patientId) {
+    public PatientDTO getPatientById(int patientId) throws Exception {
         SessionDTO session = patientViewModel.getLoginViewModel().getCurrentSession();
         if (session == null || session.getUserId() <= 0) {
             return new PatientDTO();
         }
-        return client.get
+        return client.getPatientById(patientId);
+    }
+
+    public void loadPatient()
+    {
+        error.set("");
+
+        try
+        {
+            SessionDTO session = patientViewModel.getLoginViewModel().getCurrentSession();
+
+            if (session == null || session.getUserId() <= 0)
+            {
+                error.set("No patient is logged in.");
+                return;
+            }
+
+            int patientId = session.getUserId();
+
+            PatientDTO patient = client.getPatientById(patientId);
+
+            firstName.set(patient.getFirstName());
+            lastName.set(patient.getLastName());
+            email.set(patient.getEmail());
+            phoneNum.set(patient.getPhoneNumber());
+            userName.set(patient.getUserName());
+            CPR.set(patient.getCPR());
+            gender.set(patient.getGender());
+            password.set(patient.getPassword());
+            dayOfBirth = patient.getDayOfBirth();
+        }
+        catch (Exception e)
+        {
+            error.set(e.getMessage() == null ? "Could not load patient data." : e.getMessage());
+        }
     }
 
     public StringProperty getFirstNameProperty() { return firstName; }
@@ -109,6 +147,7 @@ public class EditPatientViewModel {
     public StringProperty getUserNameProperty() { return userName; }
     public StringProperty getCPRProperty() { return CPR; }
     public StringProperty getErrorProperty() { return error; }
+    public LocalDate getDayOfBirth() {return dayOfBirth;}
     public void setDayOfBirth(LocalDate dayOfBirth) { this.dayOfBirth = dayOfBirth; }
 
     public PatientViewModel getPatientViewModel() {

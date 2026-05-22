@@ -38,7 +38,7 @@ public class ClinicServiceImpl implements ClinicService {
     @Override
     public PatientDTO updatePatient(PatientDTO patientDTO) throws SQLException {
         Patient patient = DTOMapper.toPatient(patientDTO);
-        Patient updated = PatientDAO.getInstance().updatePatient(patientDTO.getUserName());
+        Patient updated = PatientDAO.getInstance().updatePatient(patient);
         return DTOMapper.toPatientDTO(updated);
     }
 

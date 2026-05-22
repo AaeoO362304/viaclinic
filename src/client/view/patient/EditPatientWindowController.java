@@ -5,12 +5,14 @@ import client.view.login.ViewHandler;
 import client.viewModel.login.CreateAccountViewModel;
 import client.viewModel.patient.EditPatientViewModel;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import shared.PatientDTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EditPatientWindowController {
@@ -46,7 +48,7 @@ public class EditPatientWindowController {
     private ViewHandler viewHandler;
 
     public void init(ViewHandler viewHandler,
-                     EditPatientViewModel viewModel, Region root)
+                     EditPatientViewModel viewModel, Region root) throws Exception
     {
         this.viewModel = viewModel;
         this.viewHandler = viewHandler;
@@ -65,67 +67,92 @@ public class EditPatientWindowController {
 
         errorLabel.textProperty().bind(viewModel.getErrorProperty());
 
-        firstNameField.setEditable(false);
-        lastNameField.setEditable(false);
-        passwordField.setEditable(false);
-        eMailField.setEditable(false);
-        phoneNumberField.setEditable(false);
-        cprNumberField.setEditable(false);
-        usernameTextField.setEditable(false);
-
-        genderChoiceBox.setEditable(false);
-        birthdayPicker.setEditable(false);
+        setEditable(false);
 
         confirmButton.setVisible(false);
+        editButton.setVisible(true);
 
-        PatientDTO patient = viewModel.getPatientById(viewModel.getPatientViewModel().getLoginViewModel().getCurrentSession().getUserId()) ;
-
-        firstNameField.setText(patient.getFirstName());
-        lastNameField.setText(patient.getLastName());
-        passwordField.setText(patient.getPassword());
-        eMailField.setText(patient.getEmail());
-        phoneNumberField.setText(patient.getPhoneNumber());
-        cprNumberField.setText(patient.getCPR());
-        usernameTextField.setText(patient.getUserName());
-
-        genderChoiceBox.setValue(patient.getGender());
-        birthdayPicker.setValue(patient.getDayOfBirth());
-
-
+        viewModel.loadPatient();
+        birthdayPicker.setValue(viewModel.getDayOfBirth());
     }
 
-    public void editButtonPressed() {
+    private void setEditable(boolean editable)
+    {
+        firstNameField.setEditable(editable);
+        lastNameField.setEditable(editable);
+        passwordField.setEditable(editable);
+        eMailField.setEditable(editable);
+        phoneNumberField.setEditable(editable);
+        cprNumberField.setEditable(editable);
+
+        usernameTextField.setEditable(false);
+
+        genderChoiceBox.setDisable(!editable);
+        birthdayPicker.setDisable(!editable);
+    }
+
+    public void confirmButtonPressed() {
+        viewModel.setDayOfBirth(birthdayPicker.getValue());
+
+        boolean updated = viewModel.updatePatient();
+
+        if (updated)
+        {
+            viewHandler.openView("patient");
+        }
+    }
+
+    public void editButtonPressed()
+    {
         editButton.setVisible(false);
         confirmButton.setVisible(true);
 
-        firstNameField.setEditable(true);
-        lastNameField.setEditable(true);
-        passwordField.setEditable(true);
-        eMailField.setEditable(true);
-        phoneNumberField.setEditable(true);
-        cprNumberField.setEditable(true);
-        usernameTextField.setEditable(true);
-
-        genderChoiceBox.setEditable(true);
-        birthdayPicker.setEditable(true);
+        setEditable(true);
     }
 
-    public void cancelButtonPressed() {
-        firstNameField.setEditable(false);
-        lastNameField.setEditable(false);
-        passwordField.setEditable(false);
-        eMailField.setEditable(false);
-        phoneNumberField.setEditable(false);
-        cprNumberField.setEditable(false);
-        usernameTextField.setEditable(false);
+    public void cancelButtonPressed()
+    {
+        viewModel.loadPatient();
+        birthdayPicker.setValue(viewModel.getDayOfBirth());
 
-        genderChoiceBox.setEditable(false);
-        birthdayPicker.setEditable(false);
+        setEditable(false);
 
         confirmButton.setVisible(false);
         editButton.setVisible(true);
 
         viewHandler.openView("patient");
+    }
+
+    public void reset()
+    {
+        viewModel.loadPatient();
+        birthdayPicker.setValue(viewModel.getDayOfBirth());
+
+        setEditable(false);
+
+        confirmButton.setVisible(false);
+        editButton.setVisible(true);
+    }
+
+    public Region getRoot()
+    {
+        return root;
+    }
+
+    @FXML private void onEnter(ActionEvent actionEvent)
+    {
+        if (actionEvent.getSource() == firstNameField)
+        {
+            passwordField.requestFocus();
+        }
+        else if (actionEvent.getSource() == passwordField)
+        {
+            eMailField.requestFocus();
+        }
+        else
+        {
+            confirmButtonPressed();
+        }
     }
 
 }

@@ -41,4 +41,7 @@ public class ViewModelFactory {
     public BookAppointmentViewModel getBookAppointmentViewModel() { return bookAppointmentViewModel; }
     public MyAppointmentViewModel getMyAppointmentViewModel() { return myAppointmentViewModel; }
     public EditAppointmentViewModel getEditAppointmentViewModel() { return editAppointmentViewModel; }
+    public EditPatientViewModel getEditPatientViewModel() {
+        return editPatientViewModel;
+    }
 }

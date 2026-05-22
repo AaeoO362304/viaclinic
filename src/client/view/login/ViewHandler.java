@@ -4,6 +4,7 @@ import client.view.doctor.DoctorWindowController;
 import client.view.functions.BookAppointmentWindowController;
 import client.view.functions.EditAppointmentWindowController;
 import client.view.functions.MyAppointmentWindowController;
+import client.view.patient.EditPatientWindowController;
 import client.view.patient.PatientWindowController;
 import client.view.receptionist.ReceptionistWindowController;
 import client.viewModel.login.ViewModelFactory;
@@ -30,6 +31,7 @@ public class ViewHandler {
     private BookAppointmentWindowController bookAppointmentWindowController;
     private MyAppointmentWindowController myAppointmentWindowController;
     private EditAppointmentWindowController editAppointmentWindowController;
+    private EditPatientWindowController editPatientWindowController;
 
     private SessionDTO currentSession;
 
@@ -55,8 +57,9 @@ public class ViewHandler {
             case "receptionist" -> root = loadReceptionistWindow("/client/view/receptionist/ReceptionistWindow.fxml");
             case "book_appointment" -> root = loadBookAppointmentWindow("/client/view/functions/BookAppointmentWindow.fxml");
             case "my_appointments" -> root = loadMyAppointmentsWindow("/client/view/functions/MyAppointmentWindow.fxml");
+            case "profile" -> root = loadEditPatientWindow("/client/view/patient/EditPatientWindow.fxml");
             // Not implemented yet. Returning null is better than crashing the application.
-            case "chat", "registered_patients", "today_appointments", "profile",
+            case "chat", "registered_patients", "today_appointments",
                  "spontaneous_visit", "receptionist_book_appointment", "all_appointments" -> root = null;
             default -> {
                 System.out.println("Unknown view id: " + id);
@@ -280,5 +283,25 @@ public class ViewHandler {
             editAppointmentWindowController.reset();
         }
         return editAppointmentWindowController == null ? null : editAppointmentWindowController.getRoot();
+    }
+
+    private Region loadEditPatientWindow(String fxmlFile)
+    {
+        if (editPatientWindowController == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getFXMLUrl(fxmlFile));
+                Region root = loader.load();
+                editPatientWindowController = loader.getController();
+                editPatientWindowController.init(this, viewModelFactory.getEditPatientViewModel(), root);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else {
+            editPatientWindowController.reset();
+        }
+        return editPatientWindowController == null ? null : editPatientWindowController.getRoot();
     }
 }
