@@ -43,6 +43,11 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
+    public void deletePatient(int patientId) throws SQLException {
+        PatientDAO.getInstance().deletePatient(patientId);
+    }
+
+    @Override
     public DoctorDTO createDoctor(DoctorDTO doctorDTO) throws SQLException {
         Doctor doctor = DTOMapper.toDoctor(doctorDTO);
         Doctor created = DoctorDAO.getInstance().createDoctor(doctor);
@@ -110,6 +115,27 @@ public class ClinicServiceImpl implements ClinicService {
     @Override
     public void deleteAppointment(int appointmentId) throws SQLException {
         AppointmentDAO.getInstance().deleteAppointment(appointmentId);
+    }
+
+    @Override
+    public AppointmentDTO finishAppointment(int appointmentId, String notes) throws SQLException {
+       AppointmentDAO appointmentDAO  = AppointmentDAO.getInstance();
+        Appointment appointment = appointmentDAO.getAppointmentById(appointmentId);
+
+        if (appointment == null) {
+            throw new IllegalArgumentException("Appointment not found.");
+        }
+
+        appointment.setNotes(notes);
+        appointment.finish();
+
+        appointment = appointmentDAO.finishAppointment(
+                appointment.getAppointmentID(),
+                appointment.isStatus(),
+                notes
+        );
+
+        return DTOMapper.toAppointmentDTO(appointment);
     }
 
     @Override

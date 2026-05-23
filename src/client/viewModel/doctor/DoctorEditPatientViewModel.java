@@ -1,7 +1,6 @@
-package client.viewModel.patient;
+package client.viewModel.doctor;
 
 import client.model.ClinicClient;
-import client.viewModel.login.LoginViewModel;
 import client.viewModel.login.PatientViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -9,9 +8,8 @@ import shared.PatientDTO;
 import shared.SessionDTO;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-public class EditPatientViewModel {
+public class DoctorEditPatientViewModel {
     private final ClinicClient client;
     private final StringProperty firstName;
     private final StringProperty lastName;
@@ -27,7 +25,7 @@ public class EditPatientViewModel {
 
     private PatientViewModel patientViewModel;
 
-    public EditPatientViewModel(ClinicClient client, PatientViewModel patientViewModel) {
+    public DoctorEditPatientViewModel(ClinicClient client, PatientViewModel patientViewModel) {
         this.client = client;
         this.firstName = new SimpleStringProperty("");
         this.lastName = new SimpleStringProperty("");
@@ -108,24 +106,12 @@ public class EditPatientViewModel {
         return client.getPatientById(patientId);
     }
 
-    public void loadPatient()
+    public void loadPatient(PatientDTO patient)
     {
         error.set("");
 
         try
         {
-            SessionDTO session = patientViewModel.getLoginViewModel().getCurrentSession();
-
-            if (session == null || session.getUserId() <= 0)
-            {
-                error.set("No patient is logged in.");
-                return;
-            }
-
-            int patientId = session.getUserId();
-
-            PatientDTO patient = client.getPatientById(patientId);
-
             firstName.set(patient.getFirstName());
             lastName.set(patient.getLastName());
             email.set(patient.getEmail());

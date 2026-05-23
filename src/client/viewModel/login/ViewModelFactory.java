@@ -4,6 +4,9 @@ import client.model.ClinicClient;
 import client.viewModel.appointment.BookAppointmentViewModel;
 import client.viewModel.appointment.EditAppointmentViewModel;
 import client.viewModel.appointment.MyAppointmentViewModel;
+import client.viewModel.doctor.*;
+import client.viewModel.doctor.ReceptionistEditPatientViewModel;
+import client.viewModel.doctor.ReceptionistRegisteredPatientViewModel;
 import client.viewModel.patient.EditPatientViewModel;
 import shared.AppointmentDTO;
 
@@ -18,6 +21,11 @@ public class ViewModelFactory {
     private final MyAppointmentViewModel myAppointmentViewModel;
     private final EditAppointmentViewModel editAppointmentViewModel;
     private final EditPatientViewModel editPatientViewModel;
+    private final TodayAppointmentsViewModel todayAppointmentsViewModel;
+    private final DoctorEditAppointmentViewModel doctorEditAppointmentViewModel;
+    private final RegisteredPatientViewModel registeredPatientViewModel;
+    private final ReceptionistRegisteredPatientViewModel receptionistRegisteredPatientViewModel;
+    private final ReceptionistEditPatientViewModel receptionistEditPatientViewModel;
 
     public ViewModelFactory(ClinicClient client) {
         createAccountViewModel = new CreateAccountViewModel(client);
@@ -30,6 +38,11 @@ public class ViewModelFactory {
         myAppointmentViewModel = new MyAppointmentViewModel(client, patientViewModel);
         editAppointmentViewModel = new EditAppointmentViewModel(client, new AppointmentDTO());
         editPatientViewModel = new EditPatientViewModel(client, patientViewModel);
+        todayAppointmentsViewModel = new TodayAppointmentsViewModel(client, doctorViewModel);
+        doctorEditAppointmentViewModel = new DoctorEditAppointmentViewModel(client, new AppointmentDTO());
+        registeredPatientViewModel = new RegisteredPatientViewModel(client, patientViewModel);
+        receptionistRegisteredPatientViewModel = new ReceptionistRegisteredPatientViewModel(client, patientViewModel);
+        receptionistEditPatientViewModel = new ReceptionistEditPatientViewModel(client, patientViewModel);
     }
 
     public CreateAccountViewModel getCreateAccountViewModel() { return createAccountViewModel; }
@@ -43,5 +56,20 @@ public class ViewModelFactory {
     public EditAppointmentViewModel getEditAppointmentViewModel() { return editAppointmentViewModel; }
     public EditPatientViewModel getEditPatientViewModel() {
         return editPatientViewModel;
+    }
+    public TodayAppointmentsViewModel getTodayAppointmentsViewModel() {
+        return todayAppointmentsViewModel;
+    }
+    public DoctorEditAppointmentViewModel getDoctorEditAppointmentViewModel() {
+        return doctorEditAppointmentViewModel;
+    }
+    public RegisteredPatientViewModel getRegisteredPatientViewModel() {
+        return registeredPatientViewModel;
+    }
+    public ReceptionistRegisteredPatientViewModel getReceptionistRegisteredPatientViewModel() {
+        return receptionistRegisteredPatientViewModel;
+    }
+    public ReceptionistEditPatientViewModel getReceptionistEditPatientViewModel() {
+        return receptionistEditPatientViewModel;
     }
 }

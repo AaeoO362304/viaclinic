@@ -1,8 +1,9 @@
-package client.view.patient;
-
+package client.view.doctor;
 
 import client.view.login.ViewHandler;
-import client.viewModel.login.CreateAccountViewModel;
+import client.viewModel.doctor.DoctorEditAppointmentViewModel;
+import client.viewModel.doctor.DoctorEditPatientViewModel;
+import client.viewModel.doctor.ReceptionistEditPatientViewModel;
 import client.viewModel.patient.EditPatientViewModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,10 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import shared.PatientDTO;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-public class EditPatientWindowController {
+public class ReceptionistEditPatientWindowController {
     @FXML private Text firstName;
     @FXML private Text lastName;
     @FXML private Text gender;
@@ -45,15 +43,17 @@ public class EditPatientWindowController {
     @FXML private Label errorLabel;
 
     private Region root;
-    private EditPatientViewModel viewModel;
+    private ReceptionistEditPatientViewModel viewModel;
     private ViewHandler viewHandler;
+    private PatientDTO patient;
 
     public void init(ViewHandler viewHandler,
-                     EditPatientViewModel viewModel, Region root) throws Exception
+                     ReceptionistEditPatientViewModel viewModel, Region root, PatientDTO patient) throws Exception
     {
         this.viewModel = viewModel;
         this.viewHandler = viewHandler;
         this.root = root;
+        this.patient=patient;
 
         firstNameField.textProperty().bindBidirectional(viewModel.getFirstNameProperty());
         lastNameField.textProperty().bindBidirectional(viewModel.getLastNameProperty());
@@ -73,7 +73,7 @@ public class EditPatientWindowController {
         confirmButton.setVisible(false);
         editButton.setVisible(true);
 
-        viewModel.loadPatient();
+        viewModel.loadPatient(patient);
         birthdayPicker.setValue(viewModel.getDayOfBirth());
     }
 
@@ -113,7 +113,7 @@ public class EditPatientWindowController {
 
     public void cancelButtonPressed()
     {
-        viewModel.loadPatient();
+        viewModel.loadPatient(patient);
         birthdayPicker.setValue(viewModel.getDayOfBirth());
 
         setEditable(false);
@@ -124,26 +124,9 @@ public class EditPatientWindowController {
         viewHandler.openView("patient");
     }
 
-    public void deleteButtonPressed() throws Exception {
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmation.setTitle("Delete your profile");
-        confirmation.setHeaderText("Are you sure you want to remove your profile?");
-        confirmation.setContentText("This action cannot be undone.");
-
-        ButtonType result = confirmation.showAndWait()
-                .orElse(ButtonType.CANCEL);
-
-        if (result == ButtonType.OK) {
-            viewModel.deletePatient(viewModel.getPatientViewModel().getLoginViewModel().getCurrentSession().getUserId());
-            viewModel.getPatientViewModel().getLoginViewModel().logout();
-            viewHandler.setCurrentSession(null);
-            viewHandler.openView("main");
-        }
-    }
-
     public void reset()
     {
-        viewModel.loadPatient();
+        viewModel.loadPatient(patient);
         birthdayPicker.setValue(viewModel.getDayOfBirth());
 
         setEditable(false);
@@ -172,5 +155,4 @@ public class EditPatientWindowController {
             confirmButtonPressed();
         }
     }
-
 }

@@ -1,5 +1,7 @@
 package server.model.bookAppointment;
 
+import server.database.DatabaseConnection;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,12 +21,6 @@ public class DoctorDAO {
         return instance;
     }
 
-    private static Connection getConnection() throws SQLException
-    {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=viaclinic",
-                "postgres", "362304");
-    }
-
     public Doctor createDoctor(Doctor doctor) throws SQLException
     {
         String userSql = """
@@ -39,7 +35,7 @@ public class DoctorDAO {
             VALUES (?, ?)
             """;
 
-        try (Connection connection = getConnection())
+        try (Connection connection = DatabaseConnection.getConnection())
         {
             connection.setAutoCommit(false);
 
@@ -109,7 +105,7 @@ public class DoctorDAO {
             WHERE u.username = ?
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1, username);
@@ -144,7 +140,7 @@ public class DoctorDAO {
             WHERE d.doctor_id = ?
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setInt(1, doctorId);
@@ -180,7 +176,7 @@ public class DoctorDAO {
             JOIN users u ON d.doctor_id = u.id
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery())
         {

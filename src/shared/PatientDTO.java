@@ -67,4 +67,9 @@ public class PatientDTO {
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     public void setUserName(String userName) { this.userName = userName; }
     public void setAge(int age) { this.age = age; }
+
+    @Override
+    public String toString() {
+        return firstName+" "+lastName;
+    }
 }

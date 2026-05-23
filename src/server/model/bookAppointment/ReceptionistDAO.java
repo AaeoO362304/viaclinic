@@ -1,5 +1,7 @@
 package server.model.bookAppointment;
 
+import server.database.DatabaseConnection;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,12 +18,6 @@ public class ReceptionistDAO {
         return instance;
     }
 
-    private static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/postgres?currentSchema=viaclinic",
-                "postgres", "362304");
-    }
-
     public Receptionist createReceptionist(Receptionist receptionist) throws SQLException {
         String userSql = """
             INSERT INTO users
@@ -35,7 +31,7 @@ public class ReceptionistDAO {
             VALUES (?)
             """;
 
-        try (Connection connection = getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             connection.setAutoCommit(false);
 
             try (PreparedStatement userStatement = connection.prepareStatement(userSql, Statement.RETURN_GENERATED_KEYS);
@@ -90,7 +86,7 @@ public class ReceptionistDAO {
             WHERE u.username = ?
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, username);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -119,7 +115,7 @@ public class ReceptionistDAO {
             WHERE r.receptionist_id = ?
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, receptionistId);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -148,7 +144,7 @@ public class ReceptionistDAO {
             JOIN users u ON r.receptionist_id = u.id
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {

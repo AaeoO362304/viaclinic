@@ -21,10 +21,12 @@ public interface ClinicService {
     ArrayList<ReceptionistDTO> getAllReceptionists() throws SQLException;
 
     PatientDTO getPatientById(int patientId) throws SQLException;
+    void deletePatient(int patientId) throws SQLException;
 
     AppointmentDTO createAppointment(int patientId, int doctorId, LocalDateTime date, boolean status, String notes) throws SQLException;
     AppointmentDTO updateAppointment(int appointmentId, int doctorId, LocalDateTime date) throws SQLException;
     void deleteAppointment(int appointmentId) throws SQLException;
+    AppointmentDTO finishAppointment(int appointmentId, String notes) throws SQLException;
     ArrayList<AppointmentDTO> getAppointmentsByPatientId(int patientId) throws SQLException;
     ArrayList<AppointmentDTO> getAppointmentsByDoctorId(int doctorId) throws SQLException;
 }

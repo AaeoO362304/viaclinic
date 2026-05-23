@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.functions.MyAppointmentWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.patient.MyAppointmentWindowController">
    <children>
       <Button fx:id="cancelButton" layoutX="425.0" layoutY="284.0" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="53.0" prefWidth="122.0" text="Cancel" />
       <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="14.0" onMouseClicked="#clickAppointment" prefHeight="248.0" prefWidth="566.0">

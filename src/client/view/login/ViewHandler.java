@@ -1,11 +1,12 @@
 package client.view.login;
 
-import client.view.doctor.DoctorWindowController;
-import client.view.functions.BookAppointmentWindowController;
-import client.view.functions.EditAppointmentWindowController;
-import client.view.functions.MyAppointmentWindowController;
+import client.view.doctor.*;
+import client.view.patient.BookAppointmentWindowController;
+import client.view.patient.EditAppointmentWindowController;
+import client.view.patient.MyAppointmentWindowController;
 import client.view.patient.EditPatientWindowController;
 import client.view.patient.PatientWindowController;
+import client.view.receptionist.ReceptionistRegisteredPatientWindowController;
 import client.view.receptionist.ReceptionistWindowController;
 import client.viewModel.login.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import shared.AppointmentDTO;
+import shared.PatientDTO;
 import shared.SessionDTO;
 
 import java.net.URL;
@@ -32,6 +34,11 @@ public class ViewHandler {
     private MyAppointmentWindowController myAppointmentWindowController;
     private EditAppointmentWindowController editAppointmentWindowController;
     private EditPatientWindowController editPatientWindowController;
+    private TodayAppointmentsWindowController todayAppointmentsWindowController;
+    private DoctorEditAppointmentWindowController doctorEditAppointmentWindowController;
+    private RegisteredPatientWindowController registeredPatientWindowController;
+    private ReceptionistRegisteredPatientWindowController receptionistRegisteredPatientWindowController;
+    private client.view.doctor.ReceptionistEditPatientWindowController receptionistEditPatientWindowController;
 
     private SessionDTO currentSession;
 
@@ -55,12 +62,15 @@ public class ViewHandler {
             case "patient" -> root = loadPatientWindow("/client/view/patient/PatientWindow.fxml");
             case "doctor" -> root = loadDoctorWindow("/client/view/doctor/DoctorWindow.fxml");
             case "receptionist" -> root = loadReceptionistWindow("/client/view/receptionist/ReceptionistWindow.fxml");
-            case "book_appointment" -> root = loadBookAppointmentWindow("/client/view/functions/BookAppointmentWindow.fxml");
-            case "my_appointments" -> root = loadMyAppointmentsWindow("/client/view/functions/MyAppointmentWindow.fxml");
+            case "book_appointment" -> root = loadBookAppointmentWindow("/client/view/patient/BookAppointmentWindow.fxml");
+            case "my_appointments" -> root = loadMyAppointmentsWindow("/client/view/patient/MyAppointmentWindow.fxml");
             case "profile" -> root = loadEditPatientWindow("/client/view/patient/EditPatientWindow.fxml");
+            case "today_appointments" -> root = loadTodayAppointmentsWindow("/client/view/doctor/TodayAppointmentsWindow.fxml");
+            case "registered_patients" -> root = loadRegisteredPatientsWindow("/client/view/doctor/RegisteredPatientWindow.fxml");
+            case "receptionist_registered_patients" -> root = loadReceptionistRegisteredPatientsWindow("/client/view/receptionist/ReceptionistRegisteredPatientWindow.fxml");
             // Not implemented yet. Returning null is better than crashing the application.
-            case "chat", "registered_patients", "today_appointments",
-                 "spontaneous_visit", "receptionist_book_appointment", "all_appointments" -> root = null;
+            case "chat",
+                 "spontaneous_visit", "receptionist_book_appointment", "all_appointments"-> root = null;
             default -> {
                 System.out.println("Unknown view id: " + id);
                 return;
@@ -84,11 +94,41 @@ public class ViewHandler {
     public void openAppointmentEditWindow(AppointmentDTO appointment)
     {
         Region root = loadEditAppointmentWindow(
-                "/client/view/functions/EditAppointmentWindow.fxml",
+                "/client/view/patient/EditAppointmentWindow.fxml",
                 appointment
         );
 
         if (root == null)
+        {
+            return;
+        }
+
+        currentScene.setRoot(root);
+    }
+
+    public void openDoctorEditAppointmentWindow(AppointmentDTO appointment)
+    {
+        Region root = loadDoctorEditAppointmentWindow(
+                "/client/view/doctor/DoctorEditAppointmentWindow.fxml",
+                appointment
+        );
+
+        if (root == null)
+        {
+            return;
+        }
+
+        currentScene.setRoot(root);
+    }
+
+    public void openPatientEditWindow(PatientDTO patient)
+    {
+        Region root = loadReceptionistPatientEditWindow(
+                "/client/view/receptionist/ReceptionistEditPatientWindow.fxml",
+                patient
+        );
+
+        if (root==null)
         {
             return;
         }
@@ -303,5 +343,103 @@ public class ViewHandler {
             editPatientWindowController.reset();
         }
         return editPatientWindowController == null ? null : editPatientWindowController.getRoot();
+    }
+
+    private Region loadTodayAppointmentsWindow(String fxmlFile) {
+        if (todayAppointmentsWindowController == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getFXMLUrl(fxmlFile));
+                Region root = loader.load();
+                todayAppointmentsWindowController = loader.getController();
+                todayAppointmentsWindowController.init(this, viewModelFactory.getTodayAppointmentsViewModel(), root);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else {
+            todayAppointmentsWindowController.reset();
+        }
+        return todayAppointmentsWindowController == null ? null : todayAppointmentsWindowController.getRoot();
+    }
+
+    private Region loadDoctorEditAppointmentWindow(String fxmlFile, AppointmentDTO appointment)
+    {
+        if (doctorEditAppointmentWindowController == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getFXMLUrl(fxmlFile));
+                Region root = loader.load();
+                doctorEditAppointmentWindowController = loader.getController();
+                doctorEditAppointmentWindowController.init(this, viewModelFactory.getDoctorEditAppointmentViewModel(), root, appointment);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else {
+            doctorEditAppointmentWindowController.reset();
+        }
+        return doctorEditAppointmentWindowController == null ? null : doctorEditAppointmentWindowController.getRoot();
+    }
+
+    private Region loadRegisteredPatientsWindow(String fxmlFile)
+    {
+        if (registeredPatientWindowController == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getFXMLUrl(fxmlFile));
+                Region root = loader.load();
+                registeredPatientWindowController = loader.getController();
+                registeredPatientWindowController.init(this, viewModelFactory.getRegisteredPatientViewModel(), root);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else {
+            registeredPatientWindowController.reset();
+        }
+        return registeredPatientWindowController == null ? null : registeredPatientWindowController.getRoot();
+    }
+
+    private Region loadReceptionistPatientEditWindow(String fxmlFile, PatientDTO patient)
+    {
+        if (receptionistEditPatientWindowController == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getFXMLUrl(fxmlFile));
+                Region root = loader.load();
+                receptionistEditPatientWindowController = loader.getController();
+                receptionistEditPatientWindowController.init(this, viewModelFactory.getReceptionistEditPatientViewModel(), root, patient);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else {
+            receptionistEditPatientWindowController.reset();
+        }
+        return receptionistEditPatientWindowController == null ? null : receptionistEditPatientWindowController.getRoot();
+    }
+
+    private Region loadReceptionistRegisteredPatientsWindow(String fxmlFile)
+    {
+        if (receptionistRegisteredPatientWindowController == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getFXMLUrl(fxmlFile));
+                Region root = loader.load();
+                receptionistRegisteredPatientWindowController = loader.getController();
+                receptionistRegisteredPatientWindowController.init(this, viewModelFactory.getReceptionistRegisteredPatientViewModel(), root);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else {
+            receptionistRegisteredPatientWindowController.reset();
+        }
+        return receptionistRegisteredPatientWindowController == null ? null : receptionistRegisteredPatientWindowController.getRoot();
     }
 }

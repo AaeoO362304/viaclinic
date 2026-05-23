@@ -1,5 +1,7 @@
 package server.model.bookAppointment;
 
+import server.database.DatabaseConnection;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,12 +20,6 @@ public class PatientDAO {
         return instance;
     }
 
-    private static Connection getConnection() throws SQLException
-    {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=viaclinic",
-                "postgres", "362304");
-    }
-
     public Patient createPatient(Patient patient) throws SQLException
     {
         String userSql = """
@@ -38,7 +34,7 @@ public class PatientDAO {
             VALUES (?, ?, ?, ?)
             """;
 
-        try (Connection connection = getConnection())
+        try (Connection connection = DatabaseConnection.getConnection())
         {
             connection.setAutoCommit(false);
 
@@ -93,7 +89,7 @@ public class PatientDAO {
 
     public Patient getPatientByUsername(String username) throws SQLException
     {
-        try (Connection connection = getConnection())
+        try (Connection connection = DatabaseConnection.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
                     "SELECT u.id AS patient_id, u.first_name, u.last_name, u.day_of_birth, u.gender, u.phone_num, u.email, u.password, u.username, p.last_visit, p.medical_notes, p.cpr FROM users u JOIN patient p ON u.id = p.patient_id WHERE u.username = ?");
@@ -129,7 +125,7 @@ public class PatientDAO {
             WHERE p.patient_id = ?
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setInt(1, patientId);
@@ -165,7 +161,7 @@ public class PatientDAO {
             WHERE patient_id = ?
             """;
 
-        try (Connection connection = getConnection())
+        try (Connection connection = DatabaseConnection.getConnection())
         {
             connection.setAutoCommit(false);
 
@@ -203,6 +199,16 @@ public class PatientDAO {
         }
     }
 
+    public void deletePatient(int patientId) throws SQLException {
+        String sql = "DELETE FROM users WHERE id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, patientId);
+            statement.executeUpdate();
+        }
+    }
+
     public ArrayList<Patient> getAllPatients() throws SQLException
     {
         ArrayList<Patient> patients = new ArrayList<>();
@@ -225,7 +231,7 @@ public class PatientDAO {
             JOIN users u ON p.patient_id = u.id
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery())
         {

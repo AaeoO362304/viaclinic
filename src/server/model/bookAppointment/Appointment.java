@@ -1,15 +1,20 @@
 package server.model.bookAppointment;
 
+import server.model.bookAppointment.state.AppointmentState;
+import server.model.bookAppointment.state.FinishedState;
+import server.model.bookAppointment.state.NotFinishedState;
+
 import javax.print.Doc;
 import java.time.LocalDateTime;
 
 public class Appointment {
     private int appointmentID;
-    private LocalDateTime date;
-    private Doctor doctor;
     private Patient patient;
-    private boolean status;
+    private Doctor doctor;
+    private LocalDateTime date;
+    private AppointmentState state;
     private String notes;
+    private boolean status;
 
     public Appointment(Patient patient, Doctor doctor, LocalDateTime date) {
         this.date=date;
@@ -20,11 +25,16 @@ public class Appointment {
     }
 
     public Appointment(Patient patient, Doctor doctor, LocalDateTime date, boolean status, String notes) {
-        this.date=date;
-        this.doctor=doctor;
-        this.patient=patient;
-        this.status=status;
-        this.notes=notes;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.date = date;
+        this.notes = notes;
+
+        if (status) {
+            this.state = new FinishedState();
+        } else {
+            this.state = new NotFinishedState();
+        }
     }
 
     public Appointment(int appointmentID, Patient patient, Doctor doctor, LocalDateTime date) {
@@ -41,7 +51,11 @@ public class Appointment {
         this.date=date;
         this.doctor=doctor;
         this.patient=patient;
-        this.status=status;
+        if (status) {
+            this.state = new FinishedState();
+        } else {
+            this.state = new NotFinishedState();
+        }
         this.notes=notes;
     }
 
@@ -59,10 +73,6 @@ public class Appointment {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-    }
-
-    public boolean isStatus() {
-        return status;
     }
 
     public void setStatus(boolean status) {
@@ -93,5 +103,28 @@ public class Appointment {
         this.appointmentID = appointmentID;
     }
 
+    public void finish() {
+        state.finish(this);
+    }
+
+    public void reopen() {
+        state.reopen(this);
+    }
+
+    public boolean isStatus() {
+        return state.asBoolean();
+    }
+
+    public String getStatusText() {
+        return state.getName();
+    }
+
+    public void setState(AppointmentState state) {
+        this.state = state;
+    }
+
+    public AppointmentState getState() {
+        return state;
+    }
 
 }

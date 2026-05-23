@@ -57,7 +57,7 @@ public class ReceptionistWindowController {
     }
 
     public void registeredPatientsButtonPressed() {
-        viewHandler.openView("registered_patients");
+        viewHandler.openView("receptionist_registered_patients");
     }
 
     private void setLabel(SessionDTO session)

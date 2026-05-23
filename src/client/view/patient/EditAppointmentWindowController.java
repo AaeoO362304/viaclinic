@@ -1,21 +1,20 @@
-package client.view.functions;
+package client.view.patient;
 
 import client.view.login.ViewHandler;
-import client.viewModel.appointment.BookAppointmentViewModel;
+import client.viewModel.appointment.EditAppointmentViewModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import shared.AppointmentDTO;
 import shared.DoctorDTO;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class BookAppointmentWindowController {
+public class EditAppointmentWindowController {
 
     @FXML private Button cancelButton;
     @FXML private Button confirmButton;
@@ -26,51 +25,45 @@ public class BookAppointmentWindowController {
 
     private Region root;
     private ViewHandler viewHandler;
-    private BookAppointmentViewModel bookAppointmentViewModel;
+    private EditAppointmentViewModel editAppointmentViewModel;
     private ArrayList<String> appointmentHours = new ArrayList<String>();
+    private int appointmentId;
 
-    public BookAppointmentWindowController() {}
+    public EditAppointmentWindowController() {}
 
     public void init(ViewHandler viewHandler,
-                     BookAppointmentViewModel bookAppointmentViewModel,
-                     Region root) {
+                     EditAppointmentViewModel viewModel,
+                     Region root,
+                     AppointmentDTO appointment)
+    {
         this.viewHandler = viewHandler;
-        this.bookAppointmentViewModel = bookAppointmentViewModel;
+        this.editAppointmentViewModel = viewModel;
         this.root = root;
 
-        errorLabel.textProperty().bind(bookAppointmentViewModel.getErrorProperty());
+        viewModel.setAppointment(appointment);
         loadDoctors();
-
-        timeComboBox.setItems(
-                FXCollections.observableArrayList(
-                        "10:00", "11:00", "12:00",
-                        "13:00", "14:00", "15:00",
-                        "16:00", "17:00", "18:00"
-                )
-        );
-
 
     }
 
     private void loadDoctors() {
         try {
-            doctorComboBox.setItems(FXCollections.observableArrayList(bookAppointmentViewModel.getAllDoctors()));
+            doctorComboBox.setItems(FXCollections.observableArrayList(editAppointmentViewModel.getAllDoctors()));
         }
         catch (Exception e) {
-            bookAppointmentViewModel.getErrorProperty().set(e.getMessage() == null ? "Could not load doctors." : e.getMessage());
+            editAppointmentViewModel.getErrorProperty().set(e.getMessage() == null ? "Could not load doctors." : e.getMessage());
         }
     }
 
     @FXML
     public void confirmButtonPressed() {
-        bookAppointmentViewModel.setDate(datePicker.getValue());
-        bookAppointmentViewModel.setDoctor(doctorComboBox.getValue());
-        bookAppointmentViewModel.getTimeProperty().set(timeComboBox.getValue());
+        editAppointmentViewModel.setDate(datePicker.getValue());
+        editAppointmentViewModel.setDoctor(doctorComboBox.getValue());
+        editAppointmentViewModel.getTimeProperty().set(timeComboBox.getValue());
 
-        boolean created = bookAppointmentViewModel.create();
+        boolean updated = editAppointmentViewModel.update();
 
-        if (created) {
-            viewHandler.openView("patient");
+        if (updated) {
+            viewHandler.openView("my_appointments");
         }
     }
 
@@ -80,7 +73,7 @@ public class BookAppointmentWindowController {
     }
 
     public void reset() {
-        bookAppointmentViewModel.clear();
+        editAppointmentViewModel.clear();
         datePicker.setValue(null);
         doctorComboBox.getSelectionModel().clearSelection();
         timeComboBox.getSelectionModel().clearSelection();
@@ -107,7 +100,7 @@ public class BookAppointmentWindowController {
         LocalTime time = LocalTime.now();
         LocalDate date = LocalDate.now();
 
-        if (datePicker.getValue().equals(date)){
+        if (datePicker.getValue().equals(date) && time.getHour()>9 && time.getHour()<19){
             for (int i = 0; i < 18 - time.getHour(); i++) {
                 int x = 18-i;
                 appointmentHours.add(x + ":00");
@@ -131,4 +124,6 @@ public class BookAppointmentWindowController {
         }
 
     }
+
+
 }

@@ -6,7 +6,7 @@ public class TestData {
     public static void main(String[] args) {
         try
         {
-
+        /**
             PatientDAO databasePatientDAO = PatientDAO.getInstance();
 
             String firstName="Mourice";
@@ -57,7 +57,31 @@ public class TestData {
                     specialization
             );
 
-            databaseDoctorDAO.createDoctor(doctor);
+            databaseDoctorDAO.createDoctor(doctor); */
+
+            ReceptionistDAO databaseReceptionistDAO = ReceptionistDAO.getInstance();
+
+            String receptionistFirstName = "Mourice";
+            String receptionistLastName = "Kühn";
+            String receptionistPassword = "362304aA";
+            String receptionistEmail = "aA362304@via.dk";
+            String receptionistGender = "Male";
+            String receptionistPhoneNumber = "0163775434";
+            LocalDate receptionistDayOfBirth = LocalDate.of(2005, 8, 1);
+            String receptionistUserName = "aaoo";
+
+            Receptionist receptionist = new Receptionist(
+                    receptionistFirstName,
+                    receptionistLastName,
+                    receptionistPassword,
+                    receptionistEmail,
+                    receptionistGender,
+                    receptionistPhoneNumber,
+                    receptionistDayOfBirth,
+                    receptionistUserName
+            );
+
+            databaseReceptionistDAO.createReceptionist(receptionist);
         }
         catch (Exception e)
         {

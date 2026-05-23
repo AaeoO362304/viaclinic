@@ -3,6 +3,9 @@ package server.model.bookAppointment;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import server.database.DatabaseConnection;
+
+import javax.xml.crypto.Data;
 
 public class AppointmentDAO {
     private static AppointmentDAO instance;
@@ -18,19 +21,13 @@ public class AppointmentDAO {
         return instance;
     }
 
-    private static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/postgres?currentSchema=viaclinic",
-                "postgres", "362304");
-    }
-
     public Appointment create(Patient patient, Doctor doctor, LocalDateTime date, boolean status, String notes) throws SQLException {
         String sql = """
             INSERT INTO appointment(patient_id, doctor_id, appointment_date, status, notes)
             VALUES (?, ?, ?, ?, ?)
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setInt(1, patient.getPatientID());
@@ -62,7 +59,7 @@ public class AppointmentDAO {
             ORDER BY appointment_date
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, patientID);
@@ -84,7 +81,7 @@ public class AppointmentDAO {
             ORDER BY appointment_date
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, doctorID);
@@ -98,7 +95,7 @@ public class AppointmentDAO {
     }
 
     public boolean deleteAppointment(int appointmentId) throws SQLException {
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement("DELETE FROM appointment WHERE appointment_id = ?")) {
             statement.setInt(1, appointmentId);
             return statement.executeUpdate() == 1;
@@ -108,7 +105,7 @@ public class AppointmentDAO {
     public Appointment updateAppointment(int appointmentId, LocalDateTime date, int newDoctorId) throws SQLException {
         String sql = "UPDATE appointment SET appointment_date = ?, doctor_id = ? WHERE appointment_id = ?";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setTimestamp(1, Timestamp.valueOf(date));
@@ -122,6 +119,45 @@ public class AppointmentDAO {
         }
     }
 
+    public Appointment finishAppointment(int appointmentId, boolean status, String notes) throws SQLException {
+        String appointmentSql = "UPDATE appointment SET status = ?, notes = ? WHERE appointment_id = ?";
+
+        String patientSql = "UPDATE patient SET last_visit = ?, medical_notes = ? WHERE patient_id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection())
+        {
+            connection.setAutoCommit(false);
+            Appointment appointment = getAppointmentById(appointmentId);
+            try
+            {
+                PreparedStatement appointmentStatement = connection.prepareStatement(appointmentSql);
+
+                appointmentStatement.setBoolean(1, status);
+                appointmentStatement.setString(2, notes);
+                appointmentStatement.setInt(3, appointmentId);
+
+                appointmentStatement.executeUpdate();
+
+                PreparedStatement patientStatement = connection.prepareStatement(patientSql);
+
+                patientStatement.setDate(1, Date.valueOf(appointment.getDate().toLocalDate()));
+                patientStatement.setString(2, appointment.getPatient().getMedicalNotes()+" | "+notes);
+                patientStatement.setInt(3, appointment.getPatient().getPatientID());
+
+                patientStatement.executeUpdate();
+
+                connection.commit();
+
+                return appointment;
+            }
+            catch (Exception e)
+            {
+                connection.rollback();
+                throw e;
+            }
+        }
+    }
+
     public Appointment getAppointmentById(int appointmentId) throws SQLException {
         String sql = """
             SELECT appointment_id, patient_id, doctor_id, appointment_date, status, notes
@@ -129,7 +165,7 @@ public class AppointmentDAO {
             WHERE appointment_id = ?
             """;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, appointmentId);

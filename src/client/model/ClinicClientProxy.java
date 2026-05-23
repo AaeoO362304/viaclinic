@@ -38,6 +38,11 @@ public class ClinicClientProxy implements ClinicClient {
     }
 
     @Override
+    public void deletePatient(int patientId) throws Exception {
+        service.deletePatient(patientId);
+    }
+
+    @Override
     public DoctorDTO createDoctor(DoctorDTO doctor) throws Exception { return service.createDoctor(doctor); }
 
     @Override
@@ -70,6 +75,11 @@ public class ClinicClientProxy implements ClinicClient {
     @Override
     public void deleteAppointment(int appointmentId) throws SQLException {
         service.deleteAppointment(appointmentId);
+    }
+
+    @Override
+    public AppointmentDTO finishAppointment(int appointmentId, String notes) throws Exception {
+        return service.finishAppointment(appointmentId, notes);
     }
 
     @Override

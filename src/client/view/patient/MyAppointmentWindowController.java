@@ -1,4 +1,4 @@
-package client.view.functions;
+package client.view.patient;
 
 import client.view.login.ViewHandler;
 import client.viewModel.appointment.MyAppointmentViewModel;
@@ -96,7 +96,10 @@ public class MyAppointmentWindowController {
         }
     }
 
-    public void cancelButtonPressed() { viewHandler.openView("patient"); }
+    public void cancelButtonPressed() {
+        editButton.setDisable(true);
+        removeButton.setDisable(true);
+        viewHandler.openView("patient"); }
 
     public Region getRoot() { return root; }
 
