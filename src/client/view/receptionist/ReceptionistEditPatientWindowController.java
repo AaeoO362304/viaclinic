@@ -1,10 +1,7 @@
-package client.view.doctor;
+package client.view.receptionist;
 
 import client.view.login.ViewHandler;
-import client.viewModel.doctor.DoctorEditAppointmentViewModel;
-import client.viewModel.doctor.DoctorEditPatientViewModel;
-import client.viewModel.doctor.ReceptionistEditPatientViewModel;
-import client.viewModel.patient.EditPatientViewModel;
+import client.viewModel.receptionist.ReceptionistEditPatientViewModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,7 +66,7 @@ public class ReceptionistEditPatientWindowController {
         errorLabel.textProperty().bind(viewModel.getErrorProperty());
 
         setEditable(false);
-
+        birthdayPicker.setDisable(true);
         confirmButton.setVisible(false);
         editButton.setVisible(true);
 
@@ -89,17 +86,16 @@ public class ReceptionistEditPatientWindowController {
         usernameTextField.setEditable(false);
 
         genderChoiceBox.setDisable(!editable);
-        birthdayPicker.setDisable(!editable);
     }
 
     public void confirmButtonPressed() {
         viewModel.setDayOfBirth(birthdayPicker.getValue());
 
-        boolean updated = viewModel.updatePatient();
+        boolean updated = viewModel.updatePatient(patient.getPatientID());
 
         if (updated)
         {
-            viewHandler.openView("patient");
+            viewHandler.openView("receptionist");
         }
     }
 
@@ -121,7 +117,7 @@ public class ReceptionistEditPatientWindowController {
         confirmButton.setVisible(false);
         editButton.setVisible(true);
 
-        viewHandler.openView("patient");
+        viewHandler.openView("receptionist");
     }
 
     public void reset()

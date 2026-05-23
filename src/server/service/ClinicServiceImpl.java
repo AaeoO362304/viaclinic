@@ -89,6 +89,15 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
+    public ArrayList<AppointmentDTO> getAllAppointments() throws SQLException {
+        ArrayList<AppointmentDTO> result = new ArrayList<>();
+        for (Appointment appointment : AppointmentDAO.getInstance().getAllAppointments()) {
+            result.add(DTOMapper.toAppointmentDTO(appointment));
+        }
+        return result;
+    }
+
+    @Override
     public PatientDTO getPatientById(int patientId) throws SQLException {
         Patient patient = PatientDAO.getInstance().getPatientById(patientId);
         return DTOMapper.toPatientDTO(patient);

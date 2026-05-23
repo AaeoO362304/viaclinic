@@ -1,4 +1,4 @@
-package client.viewModel.doctor;
+package client.viewModel.receptionist;
 
 import client.model.ClinicClient;
 import client.viewModel.login.PatientViewModel;
@@ -52,7 +52,7 @@ public class ReceptionistEditPatientViewModel {
         dayOfBirth = null;
     }
 
-    public boolean updatePatient() {
+    public boolean updatePatient(int patientId) {
         error.set("");
 
         try {
@@ -63,11 +63,6 @@ public class ReceptionistEditPatientViewModel {
             if (email.get() == null || email.get().isBlank()) { error.set("Please enter your email."); return false; }
             if (password.get() == null || password.get().isBlank()) { error.set("Please enter your password."); return false; }
             if (CPR.get() == null || CPR.get().isBlank()) { error.set("Please enter your CPR number."); return false; }
-            if (patientId <= 0)
-            {
-                SessionDTO session = patientViewModel.getLoginViewModel().getCurrentSession();
-                patientId = session.getUserId();
-            }
 
             PatientDTO patient = new PatientDTO(
                     patientId,

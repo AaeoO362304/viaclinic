@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.doctor.EditPatientWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.receptionist.ReceptionistEditPatientWindowController">
    <children>
       <Text id="passwordText" fx:id="password" layoutX="35.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="55.892578125" />
-      <Button fx:id="editButton" layoutX="235.0" layoutY="262.0" mnemonicParsing="false" onAction="#editButtonPressed" prefHeight="34.0" prefWidth="119.0" text="Edit" />
+      <Button fx:id="editButton" layoutX="137.0" layoutY="262.0" mnemonicParsing="false" onAction="#editButtonPressed" prefHeight="34.0" prefWidth="119.0" text="Edit" />
       <Button fx:id="cancelButton" layoutX="386.0" layoutY="262.0" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="34.0" prefWidth="119.0" text="Cancel" />
       <Text fx:id="firstName" layoutX="34.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
       <Text fx:id="lastName" layoutX="34.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
@@ -32,7 +32,6 @@
       <DatePicker fx:id="birthdayPicker" layoutX="470.0" layoutY="70.0" prefHeight="16.0" prefWidth="96.0" />
       <Text layoutX="408.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
       <TextField fx:id="usernameTextField" layoutX="470.0" layoutY="143.0" prefHeight="26.0" prefWidth="96.0" />
-      <Button fx:id="confirmButton" layoutX="235.0" layoutY="262.0" mnemonicParsing="false" onAction="#confirmButtonPressed" prefHeight="34.0" prefWidth="119.0" text="Confirm" />
-      <Button fx:id="deleteButton" layoutX="83.0" layoutY="262.0" mnemonicParsing="false" onAction="#deleteButtonPressed" prefHeight="34.0" prefWidth="119.0" text="Delete" />
+      <Button fx:id="confirmButton" layoutX="137.0" layoutY="262.0" mnemonicParsing="false" onAction="#confirmButtonPressed" prefHeight="34.0" prefWidth="119.0" text="Confirm" />
    </children>
 </AnchorPane>

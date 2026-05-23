@@ -1,4 +1,4 @@
-package client.viewModel.doctor;
+package client.viewModel.receptionist;
 
 import client.model.ClinicClient;
 import client.viewModel.login.PatientViewModel;

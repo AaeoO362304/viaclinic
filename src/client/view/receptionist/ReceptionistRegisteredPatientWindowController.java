@@ -1,17 +1,12 @@
 package client.view.receptionist;
 
 import client.view.login.ViewHandler;
-import client.viewModel.doctor.ReceptionistRegisteredPatientViewModel;
-import client.viewModel.doctor.RegisteredPatientViewModel;
-import client.viewModel.doctor.TodayAppointmentsViewModel;
-import client.viewModel.login.DoctorViewModel;
+import client.viewModel.receptionist.ReceptionistRegisteredPatientViewModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
-import server.model.bookAppointment.PatientDAO;
-import shared.AppointmentDTO;
 import shared.PatientDTO;
 
 import java.sql.SQLException;
@@ -84,7 +79,7 @@ public class ReceptionistRegisteredPatientWindowController {
     public void editButtonPressed() {
         PatientDTO selectedPatient = patientTable.getSelectionModel().getSelectedItem();
 
-        viewHandler.openPatientEditWindow(selectedPatient);
+        viewHandler.openReceptionistEditWindow(selectedPatient);
     }
 
     public void removeButtonPressed() throws Exception {
@@ -111,7 +106,7 @@ public class ReceptionistRegisteredPatientWindowController {
     public void cancelButtonPressed() {
         editButton.setDisable(true);
         removeButton.setDisable(true);
-        viewHandler.openView("doctor"); }
+        viewHandler.openView("receptionist"); }
 
     public Region getRoot() { return root; }
 

@@ -5,45 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c33c4f7f-7bf6-4ee7-8274-b9a30b0b8481" name="Changes" comment="a">
-      <change afterPath="$PROJECT_DIR$/src/client/view/doctor/DoctorEditAppointmentWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/view/doctor/RegisteredPatientWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/view/doctor/TodayAppointmentsWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistEditPatientWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistRegisteredPatientWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/viewModel/doctor/DoctorEditAppointmentViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/viewModel/doctor/DoctorEditPatientViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/viewModel/doctor/RegisteredPatientViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/viewModel/doctor/TodayAppointmentsViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistEditPatientViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistRegisteredPatientViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/database/DatabaseConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/state/AppointmentState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/state/FinishedState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/state/NotFinishedState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/view/patient/SpontaneousAppointmentWindowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistAllAppointmentsWindowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistBookAppointmentWindowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistEditAppointmentWindowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistTodaysAppointmentsWindowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/viewModel/patient/SpontaneousAppointmentViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistAllAppointmentsViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistBookAppointmentViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistEditAppointmentViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistTodayAppointmentsViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/model/ClinicClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/model/ClinicClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/model/ClinicClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/model/ClinicClientProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/BookAppointmentWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/BookAppointmentWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/BookAppointmentWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/BookAppointmentWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/EditAppointmentWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/EditAppointmentWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/EditAppointmentWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/EditAppointmentWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/MyAppointmentWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/MyAppointmentWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/functions/MyAppointmentWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/MyAppointmentWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/view/login/ViewHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/login/ViewHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/view/patient/EditPatientWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/EditPatientWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/view/patient/EditPatientWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/EditPatientWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistEditPatientWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistEditPatientWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistEditPatientWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistEditPatientWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistRegisteredPatientWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistRegisteredPatientWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/receptionist/ReceptionistWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/viewModel/doctor/DoctorEditPatientViewModel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/viewModel/login/ViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/login/ViewModelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/viewModel/patient/EditPatientViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/patient/EditPatientViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistEditPatientViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistEditPatientViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistRegisteredPatientViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/viewModel/receptionist/ReceptionistRegisteredPatientViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/AppointmentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/DoctorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/DoctorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/PatientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/PatientDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/ReceptionistDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/ReceptionistDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/bookAppointment/TestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/bookAppointment/TestData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/service/ClinicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/ClinicService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/service/ClinicServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/ClinicServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/PatientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/PatientDTO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,61 +67,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.0181571899139754E-69" />
-      <entry key="MS500" value="1.8238583786180024E-14" />
-      <entry key="S2" value="3.7599018384266894E-4" />
-      <entry key="S5" value="0.05614293545281252" />
-      <entry key="S10" value="0.4893822130868652" />
-      <entry key="S30" value="3.8659515416399337" />
-      <entry key="S60" value="7.383282170528678" />
-      <entry key="M2" value="10.68730558274618" />
-      <entry key="M5" value="14.997353871806423" />
-      <entry key="M10" value="20.034796077294867" />
-      <entry key="M15" value="24.195946365476377" />
-      <entry key="M30" value="38.76964318071578" />
-      <entry key="H1" value="83.87573474173101" />
-      <entry key="H2" value="182.91835037258642" />
-      <entry key="H4" value="324.65867498116717" />
-      <entry key="D1" value="602.9143923785429" />
-      <entry key="W1" value="680.7597587024201" />
+      <entry key="MS100" value="9.701463317292239E-25" />
+      <entry key="MS500" value="1.5754992633164164E-5" />
+      <entry key="S2" value="0.07706584446450813" />
+      <entry key="S5" value="0.7225382430877275" />
+      <entry key="S10" value="1.9227569405044784" />
+      <entry key="S30" value="4.328847308454414" />
+      <entry key="S60" value="5.718632249898037" />
+      <entry key="M2" value="8.886886001321361" />
+      <entry key="M5" value="26.80877736919823" />
+      <entry key="M10" value="59.55378489755082" />
+      <entry key="M15" value="86.5675854158848" />
+      <entry key="M30" value="142.67743648198893" />
+      <entry key="H1" value="213.81340954907515" />
+      <entry key="H2" value="324.59075803882956" />
+      <entry key="H4" value="488.421496138881" />
+      <entry key="D1" value="853.393210946411" />
+      <entry key="W1" value="964.3389319705748" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.001229381774663" />
-      <entry key="MS500" value="1.332901685188977" />
-      <entry key="S2" value="2.274626046651751" />
-      <entry key="S5" value="3.495355213548595" />
-      <entry key="S10" value="5.53387473663269" />
-      <entry key="S30" value="9.590877910202405" />
-      <entry key="S60" value="11.87122916788821" />
-      <entry key="M2" value="13.857301428791082" />
-      <entry key="M5" value="17.41415585050121" />
-      <entry key="M10" value="22.796422384929098" />
-      <entry key="M15" value="27.35607319130799" />
-      <entry key="M30" value="42.55639768544883" />
-      <entry key="H1" value="87.10169813678978" />
-      <entry key="H2" value="183.0871461784959" />
-      <entry key="H4" value="321.47067273312285" />
-      <entry key="D1" value="598.2919710138309" />
-      <entry key="W1" value="676.6356880201421" />
+      <entry key="MS100" value="1.0000005477586595" />
+      <entry key="MS500" value="1.063040633322582" />
+      <entry key="S2" value="1.9130252600673017" />
+      <entry key="S5" value="3.1550470870445007" />
+      <entry key="S10" value="4.4174404432263366" />
+      <entry key="S30" value="6.306362523275728" />
+      <entry key="S60" value="7.222637072834824" />
+      <entry key="M2" value="10.056518820954135" />
+      <entry key="M5" value="27.352151672045586" />
+      <entry key="M10" value="56.508968634543685" />
+      <entry key="M15" value="79.92521204679161" />
+      <entry key="M30" value="131.24510417345223" />
+      <entry key="H1" value="202.1245655023263" />
+      <entry key="H2" value="313.85979368407" />
+      <entry key="H4" value="477.24298985276124" />
+      <entry key="D1" value="842.4570771847655" />
+      <entry key="W1" value="954.1645365260913" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.038744366049049316" />
-      <entry key="MS500" value="0.635734850210402" />
-      <entry key="S2" value="1.8429907495035747" />
-      <entry key="S5" value="3.25391537097004" />
-      <entry key="S10" value="5.7550979344476305" />
-      <entry key="S30" value="13.253517966879395" />
-      <entry key="S60" value="19.1097880601144" />
-      <entry key="M2" value="24.450287887234666" />
-      <entry key="M5" value="32.35479272574588" />
-      <entry key="M10" value="42.787091170641254" />
-      <entry key="M15" value="51.51361798490572" />
-      <entry key="M30" value="81.29367196564338" />
-      <entry key="H1" value="170.94454849358223" />
-      <entry key="H2" value="365.97190124844667" />
-      <entry key="H4" value="646.1001817915907" />
-      <entry key="D1" value="1201.1973270075152" />
-      <entry key="W1" value="1357.3939857412445" />
+      <entry key="MS100" value="0.06983045562573081" />
+      <entry key="MS500" value="0.6129743161670536" />
+      <entry key="S2" value="1.6008793296545025" />
+      <entry key="S5" value="3.501145820065049" />
+      <entry key="S10" value="6.030438649950911" />
+      <entry key="S30" value="10.465406024935742" />
+      <entry key="S60" value="12.838202064749025" />
+      <entry key="M2" value="18.864795422107765" />
+      <entry key="M5" value="54.066348435756915" />
+      <entry key="M10" value="115.96172177081398" />
+      <entry key="M15" value="166.39512799162478" />
+      <entry key="M30" value="273.83829234879005" />
+      <entry key="H1" value="415.8701892262431" />
+      <entry key="H2" value="638.396400087775" />
+      <entry key="H4" value="965.622686301804" />
+      <entry key="D1" value="1695.8378095518876" />
+      <entry key="W1" value="1918.5014437949067" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -190,7 +178,7 @@
       <workItem from="1779400608083" duration="654000" />
       <workItem from="1779401315014" duration="561000" />
       <workItem from="1779401893091" duration="13424000" />
-      <workItem from="1779455845180" duration="28842000" />
+      <workItem from="1779455845180" duration="36010000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -224,7 +212,23 @@
       <option name="project" value="LOCAL" />
       <updated>1779465372830</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="a">
+      <option name="closed" value="true" />
+      <created>1779494453785</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1779494453785</updated>
+    </task>
+    <task id="LOCAL-00006" summary="a">
+      <option name="closed" value="true" />
+      <created>1779494458897</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1779494458897</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

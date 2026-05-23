@@ -20,6 +20,7 @@ public interface ClinicClient {
     ArrayList<PatientDTO> getAllPatients() throws Exception;
     ArrayList<DoctorDTO> getAllDoctors() throws Exception;
     ArrayList<ReceptionistDTO> getAllReceptionists() throws Exception;
+    ArrayList<AppointmentDTO> getAllAppointments() throws Exception;
 
     PatientDTO getPatientById(int patientId) throws Exception;
     void deletePatient(int patientId) throws Exception;

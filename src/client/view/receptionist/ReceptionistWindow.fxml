@@ -11,7 +11,7 @@
       <Button fx:id="appointmentButton" layoutX="229.0" layoutY="233.0" mnemonicParsing="false" onAction="#todayAppointmentsButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Todays Appoitnments" />
       <Button fx:id="logOutButton" layoutX="39.0" layoutY="295.0" mnemonicParsing="false" onAction="#logOutButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Log Out" />
       <Button fx:id="closeButton" layoutX="412.0" layoutY="295.0" mnemonicParsing="false" onAction="#closeButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Close" />
-      <Label fx:id="receptionistLabel" layoutX="105.0" layoutY="81.0" prefHeight="89.0" prefWidth="397.0" text="Receptionist: ">
+      <Label fx:id="receptionistLabel" layoutX="39.0" layoutY="80.0" prefHeight="89.0" prefWidth="520.0" text="Receptionist: ">
          <font>
             <Font size="40.0" />
          </font>

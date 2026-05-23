@@ -19,6 +19,7 @@ public interface ClinicService {
     ArrayList<PatientDTO> getAllPatients() throws SQLException;
     ArrayList<DoctorDTO> getAllDoctors() throws SQLException;
     ArrayList<ReceptionistDTO> getAllReceptionists() throws SQLException;
+    ArrayList<AppointmentDTO> getAllAppointments() throws SQLException;
 
     PatientDTO getPatientById(int patientId) throws SQLException;
     void deletePatient(int patientId) throws SQLException;

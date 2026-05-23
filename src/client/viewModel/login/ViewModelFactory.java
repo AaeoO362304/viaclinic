@@ -5,9 +5,10 @@ import client.viewModel.appointment.BookAppointmentViewModel;
 import client.viewModel.appointment.EditAppointmentViewModel;
 import client.viewModel.appointment.MyAppointmentViewModel;
 import client.viewModel.doctor.*;
-import client.viewModel.doctor.ReceptionistEditPatientViewModel;
-import client.viewModel.doctor.ReceptionistRegisteredPatientViewModel;
 import client.viewModel.patient.EditPatientViewModel;
+import client.viewModel.patient.SpontaneousAppointmentViewModel;
+import client.viewModel.receptionist.*;
+import client.viewModel.receptionist.ReceptionistRegisteredPatientViewModel;
 import shared.AppointmentDTO;
 
 public class ViewModelFactory {
@@ -26,6 +27,11 @@ public class ViewModelFactory {
     private final RegisteredPatientViewModel registeredPatientViewModel;
     private final ReceptionistRegisteredPatientViewModel receptionistRegisteredPatientViewModel;
     private final ReceptionistEditPatientViewModel receptionistEditPatientViewModel;
+    private final ReceptionistTodayAppointmentsViewModel receptionistTodayAppointmentsViewModel;
+    private final ReceptionistAllAppointmentsViewModel receptionistAllAppointmentsViewModel;
+    private final ReceptionistEditAppointmentViewModel receptionistEditAppointmentViewModel;
+    private final ReceptionistBookAppointmentViewModel receptionistBookAppointmentViewModel;
+    private final SpontaneousAppointmentViewModel spontaneousAppointmentViewModel;
 
     public ViewModelFactory(ClinicClient client) {
         createAccountViewModel = new CreateAccountViewModel(client);
@@ -43,6 +49,11 @@ public class ViewModelFactory {
         registeredPatientViewModel = new RegisteredPatientViewModel(client, patientViewModel);
         receptionistRegisteredPatientViewModel = new ReceptionistRegisteredPatientViewModel(client, patientViewModel);
         receptionistEditPatientViewModel = new ReceptionistEditPatientViewModel(client, patientViewModel);
+        receptionistTodayAppointmentsViewModel = new ReceptionistTodayAppointmentsViewModel(client);
+        receptionistAllAppointmentsViewModel = new ReceptionistAllAppointmentsViewModel(client);
+        receptionistEditAppointmentViewModel = new ReceptionistEditAppointmentViewModel(client, new AppointmentDTO());
+        receptionistBookAppointmentViewModel = new ReceptionistBookAppointmentViewModel(client, patientViewModel, doctorViewModel);
+        spontaneousAppointmentViewModel = new SpontaneousAppointmentViewModel(client);
     }
 
     public CreateAccountViewModel getCreateAccountViewModel() { return createAccountViewModel; }
@@ -66,10 +77,11 @@ public class ViewModelFactory {
     public RegisteredPatientViewModel getRegisteredPatientViewModel() {
         return registeredPatientViewModel;
     }
-    public ReceptionistRegisteredPatientViewModel getReceptionistRegisteredPatientViewModel() {
-        return receptionistRegisteredPatientViewModel;
-    }
-    public ReceptionistEditPatientViewModel getReceptionistEditPatientViewModel() {
-        return receptionistEditPatientViewModel;
-    }
+    public ReceptionistRegisteredPatientViewModel getReceptionistRegisteredPatientViewModel() {return receptionistRegisteredPatientViewModel;}
+    public ReceptionistEditPatientViewModel getReceptionistEditPatientViewModel() {return receptionistEditPatientViewModel;}
+    public ReceptionistTodayAppointmentsViewModel getReceptionistTodayAppointmentsViewModel() {return receptionistTodayAppointmentsViewModel;}
+    public ReceptionistAllAppointmentsViewModel getReceptionistAllAppointmentsViewModel() {return receptionistAllAppointmentsViewModel;}
+    public ReceptionistEditAppointmentViewModel getReceptionistEditAppointmentViewModel() {return receptionistEditAppointmentViewModel;}
+    public ReceptionistBookAppointmentViewModel getReceptionistBookAppointmentViewModel() {return receptionistBookAppointmentViewModel;}
+    public SpontaneousAppointmentViewModel getSpontaneousAppointmentViewModel() {return spontaneousAppointmentViewModel;}
 }

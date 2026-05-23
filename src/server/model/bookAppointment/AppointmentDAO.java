@@ -72,6 +72,25 @@ public class AppointmentDAO {
         return appointments;
     }
 
+    public ArrayList<Appointment> getAllAppointments() throws SQLException {
+        ArrayList<Appointment> appointments = new ArrayList<>();
+        String sql = """
+                SELECT *
+                FROM appointment
+                ORDER BY appointment_date
+                """;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    appointments.add(extractAppointment(rs));
+                }
+            }
+        }
+        return appointments;
+    }
+
     public ArrayList<Appointment> getAppointmentsByDoctorId(int doctorID) throws SQLException {
         ArrayList<Appointment> appointments = new ArrayList<>();
         String sql = """

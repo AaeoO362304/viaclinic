@@ -49,7 +49,7 @@ public class ReceptionistWindowController {
     }
 
     public void todayAppointmentsButtonPressed() {
-        viewHandler.openView("today_appointments");
+        viewHandler.openView("receptionist_today_appointments");
     }
 
     public void allAppointmentsButtonPressed() {

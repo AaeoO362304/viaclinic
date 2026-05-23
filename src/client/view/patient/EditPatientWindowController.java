@@ -69,7 +69,7 @@ public class EditPatientWindowController {
         errorLabel.textProperty().bind(viewModel.getErrorProperty());
 
         setEditable(false);
-
+        birthdayPicker.setDisable(true);
         confirmButton.setVisible(false);
         editButton.setVisible(true);
 
@@ -89,7 +89,6 @@ public class EditPatientWindowController {
         usernameTextField.setEditable(false);
 
         genderChoiceBox.setDisable(!editable);
-        birthdayPicker.setDisable(!editable);
     }
 
     public void confirmButtonPressed() {

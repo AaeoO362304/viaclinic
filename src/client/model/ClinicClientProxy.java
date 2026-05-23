@@ -58,6 +58,11 @@ public class ClinicClientProxy implements ClinicClient {
     public ArrayList<ReceptionistDTO> getAllReceptionists() throws Exception { return service.getAllReceptionists(); }
 
     @Override
+    public ArrayList<AppointmentDTO> getAllAppointments() throws Exception {
+        return service.getAllAppointments();
+    }
+
+    @Override
     public PatientDTO getPatientById(int patientId) throws Exception {
         return service.getPatientById(patientId);
     }
