@@ -14,45 +14,90 @@ import shared.SessionDTO;
 
 import java.net.URL;
 
+/**
+ * Loads the FXML windows and switches between them.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class ViewHandler {
+    /** The current scene. */
     private Scene currentScene;
+    /** The primary stage. */
     private Stage primaryStage;
+    /** The view model factory. */
     private final ViewModelFactory viewModelFactory;
 
+    /** The register window controller. */
     private RegisterWindowController registerWindowController;
+    /** The login window controller. */
     private LoginWindowController loginWindowController;
+    /** The main window controller. */
     private MainWindowController mainWindowController;
+    /** The patient window controller. */
     private PatientWindowController patientWindowController;
+    /** The doctor window controller. */
     private DoctorWindowController doctorWindowController;
+    /** The receptionist window controller. */
     private ReceptionistWindowController receptionistWindowController;
+    /** The book appointment window controller. */
     private BookAppointmentWindowController bookAppointmentWindowController;
+    /** The my appointment window controller. */
     private MyAppointmentWindowController myAppointmentWindowController;
+    /** The edit appointment window controller. */
     private EditAppointmentWindowController editAppointmentWindowController;
+    /** The edit patient window controller. */
     private EditPatientWindowController editPatientWindowController;
+    /** The today appointments window controller. */
     private TodayAppointmentsWindowController todayAppointmentsWindowController;
+    /** The doctor edit appointment window controller. */
     private DoctorEditAppointmentWindowController doctorEditAppointmentWindowController;
+    /** The registered patient window controller. */
     private RegisteredPatientWindowController registeredPatientWindowController;
+    /** The receptionist registered patient window controller. */
     private ReceptionistRegisteredPatientWindowController receptionistRegisteredPatientWindowController;
+    /** The receptionist edit patient window controller. */
     private ReceptionistEditPatientWindowController receptionistEditPatientWindowController;
+    /** The receptionist today appointments window controller. */
     private ReceptionistTodaysAppointmentsWindowController receptionistTodayAppointmentsWindowController;
+    /** The receptionist all appointments window controller. */
     private ReceptionistAllAppointmentsWindowController receptionistAllAppointmentsWindowController;
+    /** The receptionist edit appointment window controller. */
     private ReceptionistEditAppointmentWindowController receptionistEditAppointmentWindowController;
+    /** The receptionist book appointments window controller. */
     private ReceptionistBookAppointmentWindowController receptionistBookAppointmentsWindowController;
+    /** The spontaneous appointment window controller. */
     private SpontaneousAppointmentWindowController spontaneousAppointmentWindowController;
 
+    /** The current session. */
     private SessionDTO currentSession;
 
+    /**
+     * Creates a new {@code ViewHandler} initialised with the given view model factory.
+     *
+     * @param viewModelFactory the view model factory
+     */
     public ViewHandler(ViewModelFactory viewModelFactory) {
         this.viewModelFactory = viewModelFactory;
         this.currentScene = new Scene(new Region());
     }
 
+    /**
+     * Starts the application and shows the primary stage.
+     *
+     * @param primaryStage the primary stage
+     */
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setResizable(false);
         openView("main");
     }
 
+    /**
+     * Opens the view.
+     *
+     * @param id the identifier of the entity
+     */
     public void openView(String id) {
         Region root;
         switch (id) {
@@ -73,7 +118,10 @@ public class ViewHandler {
             case "receptionist_book_appointment" -> root = loadReceptionistBookAppointmentWindow("/client/view/receptionist/ReceptionistBookAppointmentWindow.fxml");
             case "spontaneous_visit" -> root = loadSpontaneousAppointmentWindow("/client/view/patient/SpontaneousAppointmentWindow.fxml");
             // Not implemented yet. Returning null is better than crashing the application.
-            case "chat" -> root = null;
+            case "chat" -> {
+                openChat();
+                return;
+            }
             default -> {
                 System.out.println("Unknown view id: " + id);
                 return;
@@ -94,6 +142,11 @@ public class ViewHandler {
         primaryStage.show();
     }
 
+    /**
+     * Opens the appointment edit window.
+     *
+     * @param appointment the appointment
+     */
     public void openAppointmentEditWindow(AppointmentDTO appointment)
     {
         Region root = loadEditAppointmentWindow(
@@ -109,6 +162,11 @@ public class ViewHandler {
         currentScene.setRoot(root);
     }
 
+    /**
+     * Opens the doctor edit appointment window.
+     *
+     * @param appointment the appointment
+     */
     public void openDoctorEditAppointmentWindow(AppointmentDTO appointment)
     {
         Region root = loadDoctorEditAppointmentWindow(
@@ -124,6 +182,11 @@ public class ViewHandler {
         currentScene.setRoot(root);
     }
 
+    /**
+     * Opens the receptionist edit appointment window.
+     *
+     * @param appointment the appointment
+     */
     public void openReceptionistEditAppointmentWindow(AppointmentDTO appointment)
     {
         Region root = loadReceptionistEditAppointmentsWindow(
@@ -139,6 +202,11 @@ public class ViewHandler {
         currentScene.setRoot(root);
     }
 
+    /**
+     * Opens the receptionist edit window.
+     *
+     * @param patient the patient
+     */
     public void openReceptionistEditWindow(PatientDTO patient) {
         Region root = loadReceptionistEditPatientWindow(
                 "/client/view/receptionist/ReceptionistEditPatientWindow.fxml",
@@ -153,18 +221,52 @@ public class ViewHandler {
         currentScene.setRoot(root);
     }
 
+    /**
+     * Closes the window.
+     */
     public void closeView() {
         primaryStage.close();
     }
 
+    /**
+     * Sets the current session.
+     *
+     * @param currentSession the current session
+     */
     public void setCurrentSession(SessionDTO currentSession) {
         this.currentSession = currentSession;
     }
 
+    /**
+     * Returns the current session.
+     *
+     * @return the current session
+     */
     public SessionDTO getCurrentSession() {
         return currentSession;
     }
 
+    /**
+     * Opens the chat window in its own stage for the logged-in user.
+     */
+    private void openChat() {
+        if (currentSession == null) {
+            System.out.println("Cannot open chat: no user is logged in.");
+            return;
+        }
+        try {
+            new client.view.chat.ChatWindow(currentSession, viewModelFactory.getClient()).show();
+        } catch (Exception e) {
+            System.out.println("Could not open chat: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Returns the FXML url.
+     *
+     * @param fxmlFile the fxml file
+     * @return the FXML url
+     */
     private URL getFXMLUrl(String fxmlFile) {
         URL url = getClass().getResource(fxmlFile);
         if (url == null) {
@@ -173,6 +275,12 @@ public class ViewHandler {
         return url;
     }
 
+    /**
+     * Loads the register window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadRegisterWindow(String fxmlFile) {
         if (registerWindowController == null) {
             try {
@@ -192,6 +300,12 @@ public class ViewHandler {
         return registerWindowController == null ? null : registerWindowController.getRoot();
     }
 
+    /**
+     * Loads the login window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadLoginWindow(String fxmlFile) {
         if (loginWindowController == null) {
             try {
@@ -211,6 +325,12 @@ public class ViewHandler {
         return loginWindowController == null ? null : loginWindowController.getRoot();
     }
 
+    /**
+     * Loads the main window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadMainWindow(String fxmlFile) {
         if (mainWindowController == null) {
             try {
@@ -227,6 +347,12 @@ public class ViewHandler {
         return mainWindowController == null ? null : mainWindowController.getRoot();
     }
 
+    /**
+     * Loads the patient window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadPatientWindow(String fxmlFile) {
         if (patientWindowController == null) {
             try {
@@ -246,6 +372,12 @@ public class ViewHandler {
         return patientWindowController == null ? null : patientWindowController.getRoot();
     }
 
+    /**
+     * Loads the doctor window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadDoctorWindow(String fxmlFile) {
         if (doctorWindowController == null) {
             try {
@@ -265,6 +397,12 @@ public class ViewHandler {
         return doctorWindowController == null ? null : doctorWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadReceptionistWindow(String fxmlFile) {
         if (receptionistWindowController == null) {
             try {
@@ -284,6 +422,12 @@ public class ViewHandler {
         return receptionistWindowController == null ? null : receptionistWindowController.getRoot();
     }
 
+    /**
+     * Loads the book appointment window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadBookAppointmentWindow(String fxmlFile) {
         if (bookAppointmentWindowController == null) {
             try {
@@ -303,6 +447,12 @@ public class ViewHandler {
         return bookAppointmentWindowController == null ? null : bookAppointmentWindowController.getRoot();
     }
 
+    /**
+     * Loads the my appointments window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadMyAppointmentsWindow(String fxmlFile) {
         if (myAppointmentWindowController == null) {
             try {
@@ -322,6 +472,13 @@ public class ViewHandler {
         return myAppointmentWindowController == null ? null : myAppointmentWindowController.getRoot();
     }
 
+    /**
+     * Loads the edit appointment window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @param appointment the appointment
+     * @return the resulting region
+     */
     private Region loadEditAppointmentWindow(String fxmlFile, AppointmentDTO appointment)
     {
         if (editAppointmentWindowController == null) {
@@ -342,6 +499,12 @@ public class ViewHandler {
         return editAppointmentWindowController == null ? null : editAppointmentWindowController.getRoot();
     }
 
+    /**
+     * Loads the edit patient window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadEditPatientWindow(String fxmlFile)
     {
         if (editPatientWindowController == null) {
@@ -362,6 +525,12 @@ public class ViewHandler {
         return editPatientWindowController == null ? null : editPatientWindowController.getRoot();
     }
 
+    /**
+     * Loads the today appointments window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadTodayAppointmentsWindow(String fxmlFile) {
         if (todayAppointmentsWindowController == null) {
             try {
@@ -381,6 +550,13 @@ public class ViewHandler {
         return todayAppointmentsWindowController == null ? null : todayAppointmentsWindowController.getRoot();
     }
 
+    /**
+     * Loads the doctor edit appointment window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @param appointment the appointment
+     * @return the resulting region
+     */
     private Region loadDoctorEditAppointmentWindow(String fxmlFile, AppointmentDTO appointment)
     {
         if (doctorEditAppointmentWindowController == null) {
@@ -401,6 +577,12 @@ public class ViewHandler {
         return doctorEditAppointmentWindowController == null ? null : doctorEditAppointmentWindowController.getRoot();
     }
 
+    /**
+     * Loads the registered patients window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadRegisteredPatientsWindow(String fxmlFile)
     {
         if (registeredPatientWindowController == null) {
@@ -421,6 +603,13 @@ public class ViewHandler {
         return registeredPatientWindowController == null ? null : registeredPatientWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist patient edit window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @param patient the patient
+     * @return the resulting region
+     */
     private Region loadReceptionistPatientEditWindow(String fxmlFile, PatientDTO patient)
     {
         if (receptionistEditPatientWindowController == null) {
@@ -440,6 +629,12 @@ public class ViewHandler {
         return receptionistEditPatientWindowController == null ? null : receptionistEditPatientWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist registered patients window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadReceptionistRegisteredPatientsWindow(String fxmlFile)
     {
         if (receptionistRegisteredPatientWindowController == null) {
@@ -460,6 +655,12 @@ public class ViewHandler {
         return receptionistRegisteredPatientWindowController == null ? null : receptionistRegisteredPatientWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist today appointments window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadReceptionistTodayAppointmentsWindow(String fxmlFile)
     {
         if (receptionistTodayAppointmentsWindowController == null) {
@@ -480,6 +681,12 @@ public class ViewHandler {
         return receptionistTodayAppointmentsWindowController == null ? null : receptionistTodayAppointmentsWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist all appointments window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadReceptionistAllAppointmentsWindow(String fxmlFile)
     {
         if (receptionistAllAppointmentsWindowController == null) {
@@ -500,6 +707,13 @@ public class ViewHandler {
         return receptionistAllAppointmentsWindowController == null ? null : receptionistAllAppointmentsWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist edit appointments window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @param appointment the appointment
+     * @return the resulting region
+     */
     private Region loadReceptionistEditAppointmentsWindow(String fxmlFile, AppointmentDTO appointment)
     {
         if (receptionistEditAppointmentWindowController == null) {
@@ -520,6 +734,13 @@ public class ViewHandler {
         return receptionistEditAppointmentWindowController == null ? null : receptionistEditAppointmentWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist edit patient window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @param patient the patient
+     * @return the resulting region
+     */
     private Region loadReceptionistEditPatientWindow(String fxmlFile, PatientDTO patient)
     {
         if (receptionistEditPatientWindowController == null) {
@@ -540,6 +761,12 @@ public class ViewHandler {
         return receptionistEditPatientWindowController == null ? null : receptionistEditPatientWindowController.getRoot();
     }
 
+    /**
+     * Loads the receptionist book appointment window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadReceptionistBookAppointmentWindow(String fxmlFile) {
         if (receptionistBookAppointmentsWindowController == null) {
             try {
@@ -559,6 +786,12 @@ public class ViewHandler {
         return receptionistBookAppointmentsWindowController == null ? null : receptionistBookAppointmentsWindowController.getRoot();
     }
 
+    /**
+     * Loads the spontaneous appointment window into the view.
+     *
+     * @param fxmlFile the fxml file
+     * @return the resulting region
+     */
     private Region loadSpontaneousAppointmentWindow(String fxmlFile) {
         if (spontaneousAppointmentWindowController == null) {
             try {

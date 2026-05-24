@@ -15,7 +15,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Controller for the Receptionist All Appointments Window view.
+ * Reacts to button clicks and other input in this window and calls the view model to do the work.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class ReceptionistAllAppointmentsWindowController {
+    /** The cancel button. */
     @FXML private Button cancelButton;
     @FXML private Button editButton;
     @FXML private Button removeButton;
@@ -25,10 +33,20 @@ public class ReceptionistAllAppointmentsWindowController {
     @FXML private TableColumn<AppointmentDTO, Boolean> statusColumn;
     @FXML private TableColumn<AppointmentDTO, String> notesColumn;
 
+    /** The root. */
     private Region root;
+    /** The view handler. */
     private ViewHandler viewHandler;
+    /** The view model. */
     private ReceptionistAllAppointmentsViewModel viewModel;
 
+    /**
+     * Sets up the controller with its view handler, view model and root.
+     *
+     * @param viewHandler the view handler
+     * @param viewModel the view model
+     * @param root the root
+     */
     public void init(ViewHandler viewHandler, ReceptionistAllAppointmentsViewModel viewModel, Region root) {
         this.viewModel = viewModel;
         this.viewHandler = viewHandler;
@@ -45,6 +63,9 @@ public class ReceptionistAllAppointmentsWindowController {
         loadAppointments();
     }
 
+    /**
+     * Loads the appointments into the view.
+     */
     private void loadAppointments() {
         try {
             LocalDate today = LocalDate.now();
@@ -56,6 +77,9 @@ public class ReceptionistAllAppointmentsWindowController {
         }
     }
 
+    /**
+     * Handles an appointment being clicked.
+     */
     public void clickAppointment() {
         int index = appointmentTable.getSelectionModel().getSelectedIndex();
         if (index >= 0)
@@ -65,12 +89,20 @@ public class ReceptionistAllAppointmentsWindowController {
         }
     }
 
+    /**
+     * Handles the edit button being pressed in the view.
+     */
     public void editButtonPressed() {
         AppointmentDTO selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 
         viewHandler.openReceptionistEditAppointmentWindow(selectedAppointment);
     }
 
+    /**
+     * Handles the remove button being pressed in the view.
+     *
+     * @throws SQLException if the operation cannot be completed
+     */
     public void removeButtonPressed() throws SQLException {
         int index = appointmentTable.getSelectionModel().getSelectedIndex();
         if (index >= 0)
@@ -92,12 +124,23 @@ public class ReceptionistAllAppointmentsWindowController {
         }
     }
 
+    /**
+     * Handles the cancel button being pressed in the view.
+     */
     public void cancelButtonPressed() {
         editButton.setDisable(true);
         removeButton.setDisable(true);
         viewHandler.openView("receptionist"); }
 
+    /**
+     * Returns the root of this window.
+     *
+     * @return the root
+     */
     public Region getRoot() { return root; }
 
+    /**
+     * Clears the input fields and puts the window back to the start.
+     */
     public void reset() { loadAppointments(); }
 }

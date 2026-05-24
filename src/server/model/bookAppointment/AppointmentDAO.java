@@ -7,13 +7,31 @@ import server.database.DatabaseConnection;
 
 import javax.xml.crypto.Data;
 
+/**
+ * Handles reading and writing appointment rows in the database.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class AppointmentDAO {
+    /** The instance. */
     private static AppointmentDAO instance;
 
+    /**
+     * Creates a new {@code AppointmentDAO} instance.
+     *
+     * @throws SQLException if the operation cannot be completed
+     */
     private AppointmentDAO() throws SQLException {
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
+    /**
+     * Returns the single shared instance of {@code AppointmentDAO}.
+     *
+     * @return the instance
+     * @throws SQLException if the operation cannot be completed
+     */
     public static synchronized AppointmentDAO getInstance() throws SQLException {
         if (instance == null) {
             instance = new AppointmentDAO();
@@ -21,6 +39,17 @@ public class AppointmentDAO {
         return instance;
     }
 
+    /**
+     * Creates a new record.
+     *
+     * @param patient the patient
+     * @param doctor the doctor
+     * @param date the date
+     * @param status the status
+     * @param notes the notes
+     * @return the resulting appointment
+     * @throws SQLException if the operation cannot be completed
+     */
     public Appointment create(Patient patient, Doctor doctor, LocalDateTime date, boolean status, String notes) throws SQLException {
         String sql = """
             INSERT INTO appointment(patient_id, doctor_id, appointment_date, status, notes)
@@ -50,6 +79,13 @@ public class AppointmentDAO {
         }
     }
 
+    /**
+     * Returns the appointments by patient id.
+     *
+     * @param patientID the identifier of the patient
+     * @return the appointments by patient id
+     * @throws SQLException if the operation cannot be completed
+     */
     public ArrayList<Appointment> getAppointmentsByPatientId(int patientID) throws SQLException {
         ArrayList<Appointment> appointments = new ArrayList<>();
         String sql = """
@@ -72,6 +108,12 @@ public class AppointmentDAO {
         return appointments;
     }
 
+    /**
+     * Returns all appointments.
+     *
+     * @return the all appointments
+     * @throws SQLException if the operation cannot be completed
+     */
     public ArrayList<Appointment> getAllAppointments() throws SQLException {
         ArrayList<Appointment> appointments = new ArrayList<>();
         String sql = """
@@ -91,6 +133,13 @@ public class AppointmentDAO {
         return appointments;
     }
 
+    /**
+     * Returns the appointments by doctor id.
+     *
+     * @param doctorID the identifier of the doctor
+     * @return the appointments by doctor id
+     * @throws SQLException if the operation cannot be completed
+     */
     public ArrayList<Appointment> getAppointmentsByDoctorId(int doctorID) throws SQLException {
         ArrayList<Appointment> appointments = new ArrayList<>();
         String sql = """
@@ -113,6 +162,13 @@ public class AppointmentDAO {
         return appointments;
     }
 
+    /**
+     * Deletes the appointment.
+     *
+     * @param appointmentId the identifier of the appointment
+     * @return {@code true} if the operation succeeded, otherwise {@code false}
+     * @throws SQLException if the operation cannot be completed
+     */
     public boolean deleteAppointment(int appointmentId) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement("DELETE FROM appointment WHERE appointment_id = ?")) {
@@ -121,6 +177,15 @@ public class AppointmentDAO {
         }
     }
 
+    /**
+     * Updates the appointment.
+     *
+     * @param appointmentId the identifier of the appointment
+     * @param date the date
+     * @param newDoctorId the identifier of the new doctor
+     * @return the resulting appointment
+     * @throws SQLException if the operation cannot be completed
+     */
     public Appointment updateAppointment(int appointmentId, LocalDateTime date, int newDoctorId) throws SQLException {
         String sql = "UPDATE appointment SET appointment_date = ?, doctor_id = ? WHERE appointment_id = ?";
 
@@ -138,6 +203,15 @@ public class AppointmentDAO {
         }
     }
 
+    /**
+     * Finishes the appointment.
+     *
+     * @param appointmentId the identifier of the appointment
+     * @param status the status
+     * @param notes the notes
+     * @return the resulting appointment
+     * @throws SQLException if the operation cannot be completed
+     */
     public Appointment finishAppointment(int appointmentId, boolean status, String notes) throws SQLException {
         String appointmentSql = "UPDATE appointment SET status = ?, notes = ? WHERE appointment_id = ?";
 
@@ -177,6 +251,13 @@ public class AppointmentDAO {
         }
     }
 
+    /**
+     * Returns the appointment by id.
+     *
+     * @param appointmentId the identifier of the appointment
+     * @return the appointment by id
+     * @throws SQLException if the operation cannot be completed
+     */
     public Appointment getAppointmentById(int appointmentId) throws SQLException {
         String sql = """
             SELECT appointment_id, patient_id, doctor_id, appointment_date, status, notes
@@ -197,6 +278,13 @@ public class AppointmentDAO {
         return null;
     }
 
+    /**
+     * Reads one appointment from the database result.
+     *
+     * @param rs the rs
+     * @return the resulting appointment
+     * @throws SQLException if the operation cannot be completed
+     */
     private Appointment extractAppointment(ResultSet rs) throws SQLException {
         int appointmentID = rs.getInt("appointment_id");
         int patientId = rs.getInt("patient_id");

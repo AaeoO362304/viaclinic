@@ -15,19 +15,42 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * View model for the Edit Appointment screen.
+ * Stores the data shown on screen and has the methods the controller calls.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class EditAppointmentViewModel {
+    /** The client. */
     private final ClinicClient client;
 
+    /** The appointment date. */
     private LocalDateTime appointmentDate;
+    /** The date. */
     private LocalDate date;
+    /** The time. */
     private final StringProperty time;
+    /** The error. */
     private final StringProperty error;
+    /** The notes. */
     private final StringProperty notes;
+    /** The appointment. */
     private AppointmentDTO appointment;
+    /** The doctor. */
     private DoctorDTO doctor;
+    /** The patient. */
     private PatientDTO patient;
+    /** The status. */
     private boolean status;
 
+    /**
+     * Creates a new {@code EditAppointmentViewModel} initialised with the given client, appointment.
+     *
+     * @param client the client
+     * @param appointment the appointment
+     */
     public EditAppointmentViewModel(ClinicClient client, AppointmentDTO appointment
                                     ) {
         this.client = client;
@@ -40,15 +63,32 @@ public class EditAppointmentViewModel {
         this.status = false;
     }
 
+    /**
+     * Returns all doctors.
+     *
+     * @return the all doctors
+     * @throws Exception if the operation cannot be completed
+     */
     public ArrayList<DoctorDTO> getAllDoctors() throws Exception {
         return client.getAllDoctors();
     }
 
+    /**
+     * Creates a new local date time.
+     *
+     * @param date the date
+     * @param time the time
+     */
     private void createLocalDateTime(LocalDate date, String time) {
         LocalTime localTime = LocalTime.parse(time);
         appointmentDate = LocalDateTime.of(date, localTime);
     }
 
+    /**
+     * Updates the record.
+     *
+     * @return {@code true} if the operation succeeded, otherwise {@code false}
+     */
     public boolean update() {
         error.set("");
 
@@ -68,6 +108,9 @@ public class EditAppointmentViewModel {
         }
     }
 
+    /**
+     * Clears the values in this view model.
+     */
     public void clear() {
         time.set("");
         notes.set("");
@@ -79,10 +122,40 @@ public class EditAppointmentViewModel {
         status = false;
     }
 
+    /**
+     * Sets the date.
+     *
+     * @param date the date
+     */
     public void setDate(LocalDate date) { this.date = date; }
+    /**
+     * Sets the doctor.
+     *
+     * @param doctor the doctor
+     */
     public void setDoctor(DoctorDTO doctor) { this.doctor = doctor; }
+    /**
+     * Sets the appointment.
+     *
+     * @param appointment the appointment
+     */
     public void setAppointment(AppointmentDTO appointment) {this.appointment=appointment;}
+    /**
+     * Returns the time property used for data binding.
+     *
+     * @return the time property
+     */
     public StringProperty getTimeProperty() { return time; }
+    /**
+     * Returns the notes property used for data binding.
+     *
+     * @return the notes property
+     */
     public StringProperty getNotesProperty() { return notes; }
+    /**
+     * Returns the error property used for data binding.
+     *
+     * @return the error property
+     */
     public StringProperty getErrorProperty() { return error; }
 }

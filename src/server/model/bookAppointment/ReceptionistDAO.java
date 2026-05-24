@@ -6,11 +6,26 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Handles reading and writing receptionist rows in the database.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class ReceptionistDAO {
+    /** The instance. */
     private static ReceptionistDAO instance;
 
+    /**
+     * Creates a new {@code ReceptionistDAO} instance.
+     */
     private ReceptionistDAO() {}
 
+    /**
+     * Returns the single shared instance of {@code ReceptionistDAO}.
+     *
+     * @return the instance
+     */
     public static synchronized ReceptionistDAO getInstance() {
         if (instance == null) {
             instance = new ReceptionistDAO();
@@ -18,6 +33,13 @@ public class ReceptionistDAO {
         return instance;
     }
 
+    /**
+     * Creates a new receptionist.
+     *
+     * @param receptionist the receptionist
+     * @return the resulting receptionist
+     * @throws SQLException if the operation cannot be completed
+     */
     public Receptionist createReceptionist(Receptionist receptionist) throws SQLException {
         String userSql = """
             INSERT INTO users
@@ -69,6 +91,13 @@ public class ReceptionistDAO {
         }
     }
 
+    /**
+     * Returns the receptionist by username.
+     *
+     * @param username the username
+     * @return the receptionist by username
+     * @throws SQLException if the operation cannot be completed
+     */
     public Receptionist getReceptionistByUsername(String username) throws SQLException {
         String sql = """
             SELECT
@@ -98,6 +127,13 @@ public class ReceptionistDAO {
         return null;
     }
 
+    /**
+     * Returns the receptionist by id.
+     *
+     * @param receptionistId the identifier of the receptionist
+     * @return the receptionist by id
+     * @throws SQLException if the operation cannot be completed
+     */
     public Receptionist getReceptionistById(int receptionistId) throws SQLException {
         String sql = """
             SELECT
@@ -127,6 +163,12 @@ public class ReceptionistDAO {
         return null;
     }
 
+    /**
+     * Returns all receptionists.
+     *
+     * @return the all receptionists
+     * @throws SQLException if the operation cannot be completed
+     */
     public ArrayList<Receptionist> getAllReceptionists() throws SQLException {
         ArrayList<Receptionist> receptionists = new ArrayList<>();
         String sql = """
@@ -154,6 +196,13 @@ public class ReceptionistDAO {
         return receptionists;
     }
 
+    /**
+     * Reads one receptionist from the database result.
+     *
+     * @param resultSet the result set
+     * @return the resulting receptionist
+     * @throws SQLException if the operation cannot be completed
+     */
     private Receptionist extractReceptionist(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("receptionist_id");
         String firstName = resultSet.getString("first_name");

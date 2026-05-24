@@ -6,11 +6,26 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Handles reading and writing patient rows in the database.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class PatientDAO {
+    /** The instance. */
     private static PatientDAO instance;
 
+    /**
+     * Creates a new {@code PatientDAO} instance.
+     */
     private PatientDAO() {}
 
+    /**
+     * Returns the single shared instance of {@code PatientDAO}.
+     *
+     * @return the instance
+     */
     public static synchronized PatientDAO getInstance()
     {
         if (instance == null)
@@ -20,6 +35,13 @@ public class PatientDAO {
         return instance;
     }
 
+    /**
+     * Creates a new patient.
+     *
+     * @param patient the patient
+     * @return the resulting patient
+     * @throws SQLException if the operation cannot be completed
+     */
     public Patient createPatient(Patient patient) throws SQLException
     {
         String userSql = """
@@ -87,6 +109,13 @@ public class PatientDAO {
         }
     }
 
+    /**
+     * Returns the patient by username.
+     *
+     * @param username the username
+     * @return the patient by username
+     * @throws SQLException if the operation cannot be completed
+     */
     public Patient getPatientByUsername(String username) throws SQLException
     {
         try (Connection connection = DatabaseConnection.getConnection())
@@ -104,6 +133,13 @@ public class PatientDAO {
         return null;
     }
 
+    /**
+     * Returns the patient by id.
+     *
+     * @param patientId the identifier of the patient
+     * @return the patient by id
+     * @throws SQLException if the operation cannot be completed
+     */
     public Patient getPatientById(int patientId) throws SQLException
     {
         String sql = """
@@ -141,6 +177,13 @@ public class PatientDAO {
         return null;
     }
 
+    /**
+     * Updates the patient.
+     *
+     * @param patient the patient
+     * @return the resulting patient
+     * @throws SQLException if the operation cannot be completed
+     */
     public Patient updatePatient(Patient patient) throws SQLException
     {
         String userSql = """
@@ -199,6 +242,12 @@ public class PatientDAO {
         }
     }
 
+    /**
+     * Deletes the patient.
+     *
+     * @param patientId the identifier of the patient
+     * @throws SQLException if the operation cannot be completed
+     */
     public void deletePatient(int patientId) throws SQLException {
         String sql = "DELETE FROM users WHERE id = ?";
 
@@ -209,6 +258,12 @@ public class PatientDAO {
         }
     }
 
+    /**
+     * Returns all patients.
+     *
+     * @return the all patients
+     * @throws SQLException if the operation cannot be completed
+     */
     public ArrayList<Patient> getAllPatients() throws SQLException
     {
         ArrayList<Patient> patients = new ArrayList<>();
@@ -244,6 +299,13 @@ public class PatientDAO {
         return patients;
     }
 
+    /**
+     * Reads one patient from the database result.
+     *
+     * @param resultSet the result set
+     * @return the resulting patient
+     * @throws SQLException if the operation cannot be completed
+     */
     private Patient extractPatient(ResultSet resultSet) throws SQLException
     {
         int id = resultSet.getInt("patient_id");

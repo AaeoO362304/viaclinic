@@ -9,13 +9,30 @@ import server.model.bookAppointment.Appointment;
 import server.model.bookAppointment.AppointmentDAO;
 import shared.AppointmentDTO;
 
+/**
+ * View model for the Doctor Edit Appointment screen.
+ * Stores the data shown on screen and has the methods the controller calls.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class DoctorEditAppointmentViewModel {
 
+    /** The client. */
     private final ClinicClient client;
+    /** The notes. */
     private final StringProperty notes;
+    /** The status. */
     private final BooleanProperty status;
+    /** The appointment. */
     private AppointmentDTO appointment;
 
+    /**
+     * Creates a new {@code DoctorEditAppointmentViewModel} initialised with the given client, appointment.
+     *
+     * @param client the client
+     * @param appointment the appointment
+     */
     public DoctorEditAppointmentViewModel(ClinicClient client, AppointmentDTO appointment) {
         this.client = client;
         this.appointment=appointment;
@@ -23,6 +40,11 @@ public class DoctorEditAppointmentViewModel {
         this.status = new SimpleBooleanProperty(false);
     }
 
+    /**
+     * Sets the appointment.
+     *
+     * @param appointment the appointment
+     */
     public void setAppointment(AppointmentDTO appointment) {
         this.appointment = appointment;
 
@@ -32,6 +54,11 @@ public class DoctorEditAppointmentViewModel {
         }
     }
 
+    /**
+     * Finishes the appointment.
+     *
+     * @return {@code true} if the operation succeeded, otherwise {@code false}
+     */
     public boolean finishAppointment()
     {
         try
@@ -56,19 +83,37 @@ public class DoctorEditAppointmentViewModel {
         }
     }
 
+    /**
+     * Returns the notes property used for data binding.
+     *
+     * @return the notes property
+     */
     public StringProperty getNotesProperty() {
         return notes;
     }
 
+    /**
+     * Returns the status property used for data binding.
+     *
+     * @return the status property
+     */
     public BooleanProperty getStatusProperty() {
         return status;
     }
 
+    /**
+     * Clears the values in this view model.
+     */
     public void clear() {
         notes.set("");
         status.set(false);
     }
 
+    /**
+     * Sets the notes.
+     *
+     * @param notes the notes
+     */
     public void setNotes(String notes) {
         this.notes.set(notes);
     }

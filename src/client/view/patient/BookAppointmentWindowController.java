@@ -13,8 +13,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Controller for the Book Appointment Window view.
+ * Reacts to button clicks and other input in this window and calls the view model to do the work.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class BookAppointmentWindowController {
 
+    /** The cancel button. */
     @FXML private Button cancelButton;
     @FXML private Button confirmButton;
     @FXML private DatePicker datePicker;
@@ -22,13 +30,27 @@ public class BookAppointmentWindowController {
     @FXML private ComboBox<DoctorDTO> doctorComboBox;
     @FXML private Label errorLabel;
 
+    /** The root. */
     private Region root;
+    /** The view handler. */
     private ViewHandler viewHandler;
+    /** The book appointment view model. */
     private BookAppointmentViewModel bookAppointmentViewModel;
+    /** The appointment hours. */
     private ArrayList<String> appointmentHours = new ArrayList<String>();
 
+    /**
+     * Creates a new {@code BookAppointmentWindowController} instance.
+     */
     public BookAppointmentWindowController() {}
 
+    /**
+     * Sets up the controller with its view handler, view model and root.
+     *
+     * @param viewHandler the view handler
+     * @param bookAppointmentViewModel the book appointment view model
+     * @param root the root
+     */
     public void init(ViewHandler viewHandler,
                      BookAppointmentViewModel bookAppointmentViewModel,
                      Region root) {
@@ -50,6 +72,9 @@ public class BookAppointmentWindowController {
 
     }
 
+    /**
+     * Loads the doctors into the view.
+     */
     private void loadDoctors() {
         try {
             doctorComboBox.setItems(FXCollections.observableArrayList(bookAppointmentViewModel.getAllDoctors()));
@@ -59,6 +84,9 @@ public class BookAppointmentWindowController {
         }
     }
 
+    /**
+     * Handles the confirm button being pressed in the view.
+     */
     @FXML
     public void confirmButtonPressed() {
         bookAppointmentViewModel.setDate(datePicker.getValue());
@@ -72,11 +100,17 @@ public class BookAppointmentWindowController {
         }
     }
 
+    /**
+     * Handles the cancel button being pressed in the view.
+     */
     @FXML
     public void cancelButtonPressed() {
         viewHandler.openView("patient");
     }
 
+    /**
+     * Clears the input fields and puts the window back to the start.
+     */
     public void reset() {
         bookAppointmentViewModel.clear();
         datePicker.setValue(null);
@@ -85,8 +119,18 @@ public class BookAppointmentWindowController {
         loadDoctors();
     }
 
+    /**
+     * Returns the root of this window.
+     *
+     * @return the root
+     */
     public Region getRoot() { return root; }
 
+    /**
+     * Handles the Enter key being pressed.
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     private void onEnter(ActionEvent actionEvent) {
         if (actionEvent.getSource() == datePicker) {
@@ -100,6 +144,9 @@ public class BookAppointmentWindowController {
         }
     }
 
+    /**
+     * Handles the date select event from the view.
+     */
     @FXML
     private void onDateSelect() {
         LocalTime time = LocalTime.now();
@@ -116,7 +163,7 @@ public class BookAppointmentWindowController {
                             appointmentHours
                     )
             );
-        }
+        } else if (datePicker.getValue().equals(date)) timeComboBox.setItems(null);
 
         if (datePicker.getValue() == null || !datePicker.getValue().equals(date)) {
             timeComboBox.setItems(

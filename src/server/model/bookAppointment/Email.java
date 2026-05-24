@@ -1,9 +1,18 @@
 package server.model.bookAppointment;
 
+/**
+ * Stores an email address and checks that it is valid.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class Email
 {
+    /** The user. */
     private String user; // case sensitive
+    /** The host. */
     private String host; // case insensitive
+    /** The domain. */
     private String domain; // case insensitive
 
     /**

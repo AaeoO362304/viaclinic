@@ -5,19 +5,40 @@ import server.model.bookAppointment.*;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * Checks a user's login against the patient, doctor and receptionist data.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class LoginAuthenticator implements LoginService {
+    /** The patient DAO. */
     private final PatientDAO patientDAO;
+    /** The doctor DAO. */
     private final DoctorDAO doctorDAO;
+    /** The receptionist DAO. */
     private final ReceptionistDAO receptionistDAO;
 
+    /** The current session. */
     private Session currentSession;
 
+    /**
+     * Creates a new {@code LoginAuthenticator} instance.
+     */
     public LoginAuthenticator() {
         this.patientDAO = PatientDAO.getInstance();
         this.doctorDAO = DoctorDAO.getInstance();
         this.receptionistDAO = ReceptionistDAO.getInstance();
     }
 
+    /**
+     * Checks the login and starts a session.
+     *
+     * @param username the username
+     * @param password the password
+     * @return the resulting session
+     * @throws AuthenticationException if the operation cannot be completed
+     */
     @Override
     public Session login(String username, String password) throws AuthenticationException {
         try {
@@ -46,15 +67,34 @@ public class LoginAuthenticator implements LoginService {
         }
     }
 
+    /**
+     * Logs the user out.
+     */
     @Override
     public void logout() { currentSession = null; }
 
+    /**
+     * Returns the current session.
+     *
+     * @return the current session
+     */
     @Override
     public Session getCurrentSession() { return currentSession; }
 
+    /**
+     * Indicates whether logged in.
+     *
+     * @return {@code true} if logged in, otherwise {@code false}
+     */
     @Override
     public boolean isLoggedIn() { return currentSession != null; }
 
+    /**
+     * Indicates whether role.
+     *
+     * @param role the role
+     * @return {@code true} if role, otherwise {@code false}
+     */
     @Override
     public boolean hasRole(Role role) { return currentSession != null && currentSession.getRole() == role; }
 }

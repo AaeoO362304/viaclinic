@@ -2,11 +2,22 @@ package server.model.bookAppointment;
 
 import java.time.LocalDate;
 
+/**
+ * Adds some example data to the database for testing.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class TestData {
+    /**
+     * The main method that starts the application.
+     *
+     * @param args the args
+     */
     public static void main(String[] args) {
         try
         {
-        /**
+
             PatientDAO databasePatientDAO = PatientDAO.getInstance();
 
             String firstName="Mourice";
@@ -57,7 +68,7 @@ public class TestData {
                     specialization
             );
 
-            databaseDoctorDAO.createDoctor(doctor); */
+            databaseDoctorDAO.createDoctor(doctor);
 
             ReceptionistDAO databaseReceptionistDAO = ReceptionistDAO.getInstance();
 

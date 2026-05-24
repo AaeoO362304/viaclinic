@@ -12,27 +12,52 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import shared.RoleDTO;
 
+/**
+ * Controller for the Login Window view.
+ * Reacts to button clicks and other input in this window and calls the view model to do the work.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class LoginWindowController {
+    /** The id text. */
     @FXML private Text idText;
     @FXML private Text passwordText;
 
+    /** The id text field. */
     @FXML private TextField idTextField;
     @FXML private PasswordField passwordTextField;
 
+    /** The login button. */
     @FXML private Button loginButton;
     @FXML private Button cancelButton;
 
+    /** The error label. */
     @FXML private Label errorLabel;
 
+    /** The patient pane. */
     @FXML private AnchorPane patientPane;
 
+    /** The root. */
     private Region root;
+    /** The view model. */
     private LoginViewModel viewModel;
+    /** The view handler. */
     private ViewHandler viewHandler;
 
+    /**
+     * Creates a new {@code LoginWindowController} instance.
+     */
     public LoginWindowController() {
     }
 
+    /**
+     * Sets up the controller with its view handler, view model and root.
+     *
+     * @param viewHandler the view handler
+     * @param viewModel the view model
+     * @param root the root
+     */
     public void init(ViewHandler viewHandler,
                      LoginViewModel viewModel, Region root)
     {
@@ -46,6 +71,9 @@ public class LoginWindowController {
         errorLabel.textProperty().bind(viewModel.getErrorProperty());
     }
 
+    /**
+     * Handles the login button being pressed in the view.
+     */
     @FXML
     private void loginButtonPressed()
     {
@@ -70,12 +98,20 @@ public class LoginWindowController {
         }
     }
 
+    /**
+     * Handles the cancel button being pressed in the view.
+     */
     @FXML
     private void cancelButtonPressed()
     {
         viewHandler.openView("main");
     }
 
+    /**
+     * Handles the Enter key being pressed.
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     private void onEnter(ActionEvent actionEvent)
     {
@@ -89,11 +125,19 @@ public class LoginWindowController {
         }
     }
 
+    /**
+     * Clears the input fields and puts the window back to the start.
+     */
     public void reset()
     {
         viewModel.clear();
     }
 
+    /**
+     * Returns the root of this window.
+     *
+     * @return the root
+     */
     public Region getRoot()
     {
         return root;

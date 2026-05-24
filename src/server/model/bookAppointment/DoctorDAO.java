@@ -6,12 +6,27 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Handles reading and writing doctor rows in the database.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class DoctorDAO {
 
+    /** The instance. */
     private static DoctorDAO instance;
 
+    /**
+     * Creates a new {@code DoctorDAO} instance.
+     */
     private DoctorDAO() {}
 
+    /**
+     * Returns the single shared instance of {@code DoctorDAO}.
+     *
+     * @return the instance
+     */
     public static synchronized DoctorDAO getInstance()
     {
         if (instance == null)
@@ -21,6 +36,13 @@ public class DoctorDAO {
         return instance;
     }
 
+    /**
+     * Creates a new doctor.
+     *
+     * @param doctor the doctor
+     * @return the resulting doctor
+     * @throws SQLException if the operation cannot be completed
+     */
     public Doctor createDoctor(Doctor doctor) throws SQLException
     {
         String userSql = """
@@ -86,6 +108,13 @@ public class DoctorDAO {
         }
     }
 
+    /**
+     * Returns the doctor by username.
+     *
+     * @param username the username
+     * @return the doctor by username
+     * @throws SQLException if the operation cannot be completed
+     */
     public Doctor getDoctorByUsername(String username) throws SQLException
     {
         String sql = """
@@ -121,6 +150,13 @@ public class DoctorDAO {
         return null;
     }
 
+    /**
+     * Returns the doctor by id.
+     *
+     * @param doctorId the identifier of the doctor
+     * @return the doctor by id
+     * @throws SQLException if the operation cannot be completed
+     */
     public Doctor getDoctorById(int doctorId) throws SQLException
     {
         String sql = """
@@ -156,6 +192,12 @@ public class DoctorDAO {
         return null;
     }
 
+    /**
+     * Returns all doctors.
+     *
+     * @return the all doctors
+     * @throws SQLException if the operation cannot be completed
+     */
     public ArrayList<Doctor> getAllDoctors() throws SQLException
     {
         ArrayList<Doctor> doctors = new ArrayList<>();
@@ -189,6 +231,13 @@ public class DoctorDAO {
         return doctors;
     }
 
+    /**
+     * Reads one doctor from the database result.
+     *
+     * @param resultSet the result set
+     * @return the resulting doctor
+     * @throws SQLException if the operation cannot be completed
+     */
     private Doctor extractDoctor(ResultSet resultSet) throws SQLException
     {
         int id = resultSet.getInt("doctor_id");

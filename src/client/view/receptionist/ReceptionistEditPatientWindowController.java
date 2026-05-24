@@ -10,7 +10,15 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import shared.PatientDTO;
 
+/**
+ * Controller for the Receptionist Edit Patient Window view.
+ * Reacts to button clicks and other input in this window and calls the view model to do the work.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class ReceptionistEditPatientWindowController {
+    /** The first name. */
     @FXML private Text firstName;
     @FXML private Text lastName;
     @FXML private Text gender;
@@ -20,6 +28,7 @@ public class ReceptionistEditPatientWindowController {
     @FXML private Text password;
     @FXML private Text cprNumber;
 
+    /** The first name field. */
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
     @FXML private TextField phoneNumberField;
@@ -28,22 +37,39 @@ public class ReceptionistEditPatientWindowController {
     @FXML private TextField cprNumberField;
     @FXML private TextField usernameTextField;
 
+    /** The birthday picker. */
     @FXML private DatePicker birthdayPicker;
 
+    /** The gender choice box. */
     @FXML private ComboBox<String> genderChoiceBox;
 
+    /** The edit button. */
     @FXML private Button editButton;
     @FXML private Button confirmButton;
     @FXML private Button cancelButton;
     @FXML private Button deleteButton;
 
+    /** The error label. */
     @FXML private Label errorLabel;
 
+    /** The root. */
     private Region root;
+    /** The view model. */
     private ReceptionistEditPatientViewModel viewModel;
+    /** The view handler. */
     private ViewHandler viewHandler;
+    /** The patient. */
     private PatientDTO patient;
 
+    /**
+     * Sets up the controller with its view handler, view model and root.
+     *
+     * @param viewHandler the view handler
+     * @param viewModel the view model
+     * @param root the root
+     * @param patient the patient
+     * @throws Exception if the operation cannot be completed
+     */
     public void init(ViewHandler viewHandler,
                      ReceptionistEditPatientViewModel viewModel, Region root, PatientDTO patient) throws Exception
     {
@@ -74,6 +100,11 @@ public class ReceptionistEditPatientWindowController {
         birthdayPicker.setValue(viewModel.getDayOfBirth());
     }
 
+    /**
+     * Sets the editable.
+     *
+     * @param editable the editable
+     */
     private void setEditable(boolean editable)
     {
         firstNameField.setEditable(editable);
@@ -88,6 +119,9 @@ public class ReceptionistEditPatientWindowController {
         genderChoiceBox.setDisable(!editable);
     }
 
+    /**
+     * Handles the confirm button being pressed in the view.
+     */
     public void confirmButtonPressed() {
         viewModel.setDayOfBirth(birthdayPicker.getValue());
 
@@ -99,6 +133,9 @@ public class ReceptionistEditPatientWindowController {
         }
     }
 
+    /**
+     * Handles the edit button being pressed in the view.
+     */
     public void editButtonPressed()
     {
         editButton.setVisible(false);
@@ -107,6 +144,9 @@ public class ReceptionistEditPatientWindowController {
         setEditable(true);
     }
 
+    /**
+     * Handles the cancel button being pressed in the view.
+     */
     public void cancelButtonPressed()
     {
         viewModel.loadPatient(patient);
@@ -120,6 +160,9 @@ public class ReceptionistEditPatientWindowController {
         viewHandler.openView("receptionist");
     }
 
+    /**
+     * Clears the input fields and puts the window back to the start.
+     */
     public void reset()
     {
         viewModel.loadPatient(patient);
@@ -131,11 +174,21 @@ public class ReceptionistEditPatientWindowController {
         editButton.setVisible(true);
     }
 
+    /**
+     * Returns the root of this window.
+     *
+     * @return the root
+     */
     public Region getRoot()
     {
         return root;
     }
 
+    /**
+     * Handles the Enter key being pressed.
+     *
+     * @param actionEvent the action event
+     */
     @FXML private void onEnter(ActionEvent actionEvent)
     {
         if (actionEvent.getSource() == firstNameField)

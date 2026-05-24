@@ -9,22 +9,48 @@ import shared.SessionDTO;
 
 import java.time.LocalDate;
 
+/**
+ * View model for the Receptionist Edit Patient screen.
+ * Stores the data shown on screen and has the methods the controller calls.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class ReceptionistEditPatientViewModel {
+    /** The client. */
     private final ClinicClient client;
+    /** The first name. */
     private final StringProperty firstName;
+    /** The last name. */
     private final StringProperty lastName;
+    /** The password. */
     private final StringProperty password;
+    /** The email. */
     private final StringProperty email;
+    /** The error. */
     private final StringProperty error;
+    /** The gender. */
     private final StringProperty gender;
+    /** The phone num. */
     private final StringProperty phoneNum;
+    /** The CPR. */
     private final StringProperty CPR;
+    /** The user name. */
     private final StringProperty userName;
+    /** The day of birth. */
     private LocalDate dayOfBirth;
+    /** The patient id. */
     private int patientId;
 
+    /** The patient view model. */
     private PatientViewModel patientViewModel;
 
+    /**
+     * Creates a new {@code ReceptionistEditPatientViewModel} initialised with the given client, patient view model.
+     *
+     * @param client the client
+     * @param patientViewModel the patient view model
+     */
     public ReceptionistEditPatientViewModel(ClinicClient client, PatientViewModel patientViewModel) {
         this.client = client;
         this.firstName = new SimpleStringProperty("");
@@ -39,6 +65,9 @@ public class ReceptionistEditPatientViewModel {
         this.patientViewModel=patientViewModel;
     }
 
+    /**
+     * Clears the values in this view model.
+     */
     public void clear() {
         firstName.set("");
         lastName.set("");
@@ -52,6 +81,12 @@ public class ReceptionistEditPatientViewModel {
         dayOfBirth = null;
     }
 
+    /**
+     * Updates the patient.
+     *
+     * @param patientId the identifier of the patient
+     * @return {@code true} if the operation succeeded, otherwise {@code false}
+     */
     public boolean updatePatient(int patientId) {
         error.set("");
 
@@ -89,10 +124,23 @@ public class ReceptionistEditPatientViewModel {
         }
     }
 
+    /**
+     * Deletes the patient.
+     *
+     * @param patientId the identifier of the patient
+     * @throws Exception if the operation cannot be completed
+     */
     public void deletePatient(int patientId) throws Exception {
         client.deletePatient(patientId);
     }
 
+    /**
+     * Returns the patient by id.
+     *
+     * @param patientId the identifier of the patient
+     * @return the patient by id
+     * @throws Exception if the operation cannot be completed
+     */
     public PatientDTO getPatientById(int patientId) throws Exception {
         SessionDTO session = patientViewModel.getLoginViewModel().getCurrentSession();
         if (session == null || session.getUserId() <= 0) {
@@ -101,6 +149,11 @@ public class ReceptionistEditPatientViewModel {
         return client.getPatientById(patientId);
     }
 
+    /**
+     * Loads the patient into the view.
+     *
+     * @param patient the patient
+     */
     public void loadPatient(PatientDTO patient)
     {
         error.set("");
@@ -123,18 +176,78 @@ public class ReceptionistEditPatientViewModel {
         }
     }
 
+    /**
+     * Returns the first name property used for data binding.
+     *
+     * @return the first name property
+     */
     public StringProperty getFirstNameProperty() { return firstName; }
+    /**
+     * Returns the last name property used for data binding.
+     *
+     * @return the last name property
+     */
     public StringProperty getLastNameProperty() { return lastName; }
+    /**
+     * Returns the password property used for data binding.
+     *
+     * @return the password property
+     */
     public StringProperty getPasswordProperty() { return password; }
+    /**
+     * Returns the email property used for data binding.
+     *
+     * @return the email property
+     */
     public StringProperty getEmailProperty() { return email; }
+    /**
+     * Returns the gender property used for data binding.
+     *
+     * @return the gender property
+     */
     public StringProperty getGenderProperty() { return gender; }
+    /**
+     * Returns the phone num property used for data binding.
+     *
+     * @return the phone num property
+     */
     public StringProperty getPhoneNumProperty() { return phoneNum; }
+    /**
+     * Returns the user name property used for data binding.
+     *
+     * @return the user name property
+     */
     public StringProperty getUserNameProperty() { return userName; }
+    /**
+     * Returns the CPR property used for data binding.
+     *
+     * @return the CPR property
+     */
     public StringProperty getCPRProperty() { return CPR; }
+    /**
+     * Returns the error property used for data binding.
+     *
+     * @return the error property
+     */
     public StringProperty getErrorProperty() { return error; }
+    /**
+     * Returns the day of birth.
+     *
+     * @return the day of birth
+     */
     public LocalDate getDayOfBirth() {return dayOfBirth;}
+    /**
+     * Sets the day of birth.
+     *
+     * @param dayOfBirth the day of birth
+     */
     public void setDayOfBirth(LocalDate dayOfBirth) { this.dayOfBirth = dayOfBirth; }
 
+    /**
+     * Returns the patient view model.
+     *
+     * @return the patient view model
+     */
     public PatientViewModel getPatientViewModel() {
         return patientViewModel;
     }

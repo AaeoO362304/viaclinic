@@ -18,9 +18,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Controller for the Receptionist Book Appointment Window view.
+ * Reacts to button clicks and other input in this window and calls the view model to do the work.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class ReceptionistBookAppointmentWindowController {
+    /** The cancel button. */
     @FXML
     private Button cancelButton;
+    /** The confirm button. */
     @FXML private Button confirmButton;
     @FXML private DatePicker datePicker;
     @FXML private ComboBox<String> timeComboBox;
@@ -28,13 +37,27 @@ public class ReceptionistBookAppointmentWindowController {
     @FXML private ComboBox<PatientDTO> patientComboBox;
     @FXML private Label errorLabel;
 
+    /** The root. */
     private Region root;
+    /** The view handler. */
     private ViewHandler viewHandler;
+    /** The book appointment view model. */
     private ReceptionistBookAppointmentViewModel bookAppointmentViewModel;
+    /** The appointment hours. */
     private ArrayList<String> appointmentHours = new ArrayList<String>();
 
+    /**
+     * Creates a new {@code ReceptionistBookAppointmentWindowController} instance.
+     */
     public ReceptionistBookAppointmentWindowController() {}
 
+    /**
+     * Sets up the controller with its view handler, view model and root.
+     *
+     * @param viewHandler the view handler
+     * @param bookAppointmentViewModel the book appointment view model
+     * @param root the root
+     */
     public void init(ViewHandler viewHandler,
                      ReceptionistBookAppointmentViewModel bookAppointmentViewModel,
                      Region root) {
@@ -57,6 +80,9 @@ public class ReceptionistBookAppointmentWindowController {
 
     }
 
+    /**
+     * Loads the doctors into the view.
+     */
     private void loadDoctors() {
         try {
             doctorComboBox.setItems(FXCollections.observableArrayList(bookAppointmentViewModel.getAllDoctors()));
@@ -66,6 +92,9 @@ public class ReceptionistBookAppointmentWindowController {
         }
     }
 
+    /**
+     * Loads the patients into the view.
+     */
     private void loadPatients() {
         try {
             patientComboBox.setItems(FXCollections.observableArrayList(bookAppointmentViewModel.getAllPatients()));
@@ -74,6 +103,9 @@ public class ReceptionistBookAppointmentWindowController {
         }
     }
 
+    /**
+     * Handles the confirm button being pressed in the view.
+     */
     @FXML
     public void confirmButtonPressed() {
         bookAppointmentViewModel.setDate(datePicker.getValue());
@@ -88,11 +120,17 @@ public class ReceptionistBookAppointmentWindowController {
         }
     }
 
+    /**
+     * Handles the cancel button being pressed in the view.
+     */
     @FXML
     public void cancelButtonPressed() {
         viewHandler.openView("receptionist");
     }
 
+    /**
+     * Clears the input fields and puts the window back to the start.
+     */
     public void reset() {
         bookAppointmentViewModel.clear();
         datePicker.setValue(null);
@@ -101,8 +139,18 @@ public class ReceptionistBookAppointmentWindowController {
         loadDoctors();
     }
 
+    /**
+     * Returns the root of this window.
+     *
+     * @return the root
+     */
     public Region getRoot() { return root; }
 
+    /**
+     * Handles the Enter key being pressed.
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     private void onEnter(ActionEvent actionEvent) {
         if (actionEvent.getSource() == datePicker) {
@@ -116,6 +164,9 @@ public class ReceptionistBookAppointmentWindowController {
         }
     }
 
+    /**
+     * Handles the date select event from the view.
+     */
     @FXML
     private void onDateSelect() {
         LocalTime time = LocalTime.now();
@@ -132,7 +183,7 @@ public class ReceptionistBookAppointmentWindowController {
                             appointmentHours
                     )
             );
-        }
+        } else if (datePicker.getValue().equals(date)) timeComboBox.setItems(null);
 
         if (datePicker.getValue() == null || !datePicker.getValue().equals(date)) {
             timeComboBox.setItems(

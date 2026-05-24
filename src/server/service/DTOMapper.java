@@ -5,7 +5,19 @@ import server.model.auth.Session;
 import server.model.bookAppointment.*;
 import shared.*;
 
+/**
+ * Helper class that converts between the server's objects and the shared DTOs.
+ *
+ * @author Kühn, Pástor, Kolodziejczyk, Bastola, Karki
+ * @version 1.0
+ */
 public class DTOMapper {
+    /**
+     * Performs the to role DTO operation.
+     *
+     * @param role the role
+     * @return the resulting role DTO
+     */
     public static RoleDTO toRoleDTO(Role role) {
         if (role == null) return null;
         return switch (role) {
@@ -15,6 +27,12 @@ public class DTOMapper {
         };
     }
 
+    /**
+     * Performs the to session DTO operation.
+     *
+     * @param session the session
+     * @return the resulting session DTO
+     */
     public static SessionDTO toSessionDTO(Session session) {
         if (session == null || session.getUser() == null) return null;
 
@@ -38,6 +56,12 @@ public class DTOMapper {
         );
     }
 
+    /**
+     * Performs the to patient DTO operation.
+     *
+     * @param patient the patient
+     * @return the resulting patient DTO
+     */
     public static PatientDTO toPatientDTO(Patient patient) {
         if (patient == null) return null;
         return new PatientDTO(
@@ -57,6 +81,12 @@ public class DTOMapper {
         );
     }
 
+    /**
+     * Converts the DTO into a Patient.
+     *
+     * @param dto the dto
+     * @return the resulting patient
+     */
     public static Patient toPatient(PatientDTO dto) {
         if (dto == null) return null;
         Patient patient = new Patient(
@@ -76,6 +106,12 @@ public class DTOMapper {
         return patient;
     }
 
+    /**
+     * Performs the to doctor DTO operation.
+     *
+     * @param doctor the doctor
+     * @return the resulting doctor DTO
+     */
     public static DoctorDTO toDoctorDTO(Doctor doctor) {
         if (doctor == null) return null;
         return new DoctorDTO(
@@ -93,6 +129,12 @@ public class DTOMapper {
         );
     }
 
+    /**
+     * Converts the DTO into a Doctor.
+     *
+     * @param dto the dto
+     * @return the resulting doctor
+     */
     public static Doctor toDoctor(DoctorDTO dto) {
         if (dto == null) return null;
         Doctor doctor = new Doctor(
@@ -110,6 +152,12 @@ public class DTOMapper {
         return doctor;
     }
 
+    /**
+     * Performs the to receptionist DTO operation.
+     *
+     * @param receptionist the receptionist
+     * @return the resulting receptionist DTO
+     */
     public static ReceptionistDTO toReceptionistDTO(Receptionist receptionist) {
         if (receptionist == null) return null;
         return new ReceptionistDTO(
@@ -126,6 +174,12 @@ public class DTOMapper {
         );
     }
 
+    /**
+     * Converts the DTO into a Receptionist.
+     *
+     * @param dto the dto
+     * @return the resulting receptionist
+     */
     public static Receptionist toReceptionist(ReceptionistDTO dto) {
         if (dto == null) return null;
         Receptionist receptionist = new Receptionist(
@@ -142,6 +196,12 @@ public class DTOMapper {
         return receptionist;
     }
 
+    /**
+     * Performs the to appointment DTO operation.
+     *
+     * @param appointment the appointment
+     * @return the resulting appointment DTO
+     */
     public static AppointmentDTO toAppointmentDTO(Appointment appointment) {
         if (appointment == null) return null;
         return new AppointmentDTO(
