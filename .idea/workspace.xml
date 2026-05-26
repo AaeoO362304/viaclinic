@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b40ccfb0-76c9-4384-b688-1aa164ff68a9" name="Changes" comment="a" />
+    <list default="true" id="b40ccfb0-76c9-4384-b688-1aa164ff68a9" name="Changes" comment="a">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_jupiter.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mockito_core.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mockito_inline.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/viaclinic-new.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/BookAppointmentViewModelTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/LoginViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIAClinicumdas.iml" beforeDir="false" afterPath="$PROJECT_DIR$/VIAClinicumdas.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/database/DatabaseConnection.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,86 +52,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ChatServer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ClinicServer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DbTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MVVM_Observer_Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MyApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestData.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/insan/Desktop/Schule/Uni/SEP2Shared/ViaClinic&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15527344&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ChatServer.executor": "Run",
+    "Application.ClinicServer.executor": "Run",
+    "Application.DbTest.executor": "Run",
+    "Application.MVVM_Observer_Main.executor": "Run",
+    "Application.MyApplication.executor": "Run",
+    "Application.TestData.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.BookAppointmentViewModelTest.createWithoutDateSetsError.executor": "Run",
+    "JUnit.BookAppointmentViewModelTest.executor": "Run",
+    "JUnit.LoginViewModelTest.executor": "Run",
+    "JUnit.LoginViewModelTest.loginWithInvalidCredentialsSetsError.executor": "Run",
+    "JUnit.LoginViewModelTest.loginWithValidCredentialsReturnsRole.executor": "Run",
+    "JUnit.LoginViewModelTest.patientObjectCreatedSuccessfully.executor": "Run",
+    "JUnit.PatientTest.executor": "Run",
+    "JUnit.ReceptionistTest.executor": "Run",
+    "JUnit.ReceptionistTest.receptionistCreatedSuccessfully.executor": "Run",
+    "JUnit.ReceptionistTest.setReceptionistIdUpdatesSuccessfully.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/insan/Desktop/Schule/Uni/SEP2Shared/ViaClinic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Application.MVVM_Observer_Main">
-    <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.networking.ChatServer" />
-      <module name="VIAClinicumdas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="server.networking.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClinicServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.networking.ClinicServer" />
-      <module name="VIAClinicumdas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="server.networking.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DbTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.database.DbTest" />
-      <module name="VIAClinicumdas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="server.database.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MVVM_Observer_Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="client.MVVM_Observer_Main" />
-      <module name="VIAClinicumdas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.LoginViewModelTest">
     <configuration name="MyApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.MyApplication" />
       <module name="VIAClinicumdas" />
@@ -134,34 +113,80 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.model.bookAppointment.TestData" />
+    <configuration name="BookAppointmentViewModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="VIAClinicumdas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="server.model.bookAppointment.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookAppointmentViewModelTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BookAppointmentViewModelTest.receptionistCreatedSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VIAClinicumdas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookAppointmentViewModelTest" />
+      <option name="METHOD_NAME" value="receptionistCreatedSuccessfully" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookAppointmentViewModelTest.setReceptionistIdUpdatesSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VIAClinicumdas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookAppointmentViewModelTest" />
+      <option name="METHOD_NAME" value="setReceptionistIdUpdatesSuccessfully" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginViewModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VIAClinicumdas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LoginViewModelTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginViewModelTest.patientObjectCreatedSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VIAClinicumdas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LoginViewModelTest" />
+      <option name="METHOD_NAME" value="patientObjectCreatedSuccessfully" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="VIAClinicumdas" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="VIAClinicumdas" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.MyApplication" />
-      <item itemvalue="Application.ChatServer" />
-      <item itemvalue="Application.DbTest" />
-      <item itemvalue="Application.ClinicServer" />
-      <item itemvalue="Application.MVVM_Observer_Main" />
-      <item itemvalue="Application.TestData" />
+      <item itemvalue="JUnit.BookAppointmentViewModelTest" />
+      <item itemvalue="JUnit.BookAppointmentViewModelTest.receptionistCreatedSuccessfully" />
+      <item itemvalue="JUnit.BookAppointmentViewModelTest.setReceptionistIdUpdatesSuccessfully" />
+      <item itemvalue="JUnit.LoginViewModelTest" />
+      <item itemvalue="JUnit.LoginViewModelTest.patientObjectCreatedSuccessfully" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MVVM_Observer_Main" />
-        <item itemvalue="Application.ChatServer" />
-        <item itemvalue="Application.ClinicServer" />
-        <item itemvalue="Application.DbTest" />
-        <item itemvalue="Application.TestData" />
+        <item itemvalue="JUnit.LoginViewModelTest" />
+        <item itemvalue="JUnit.BookAppointmentViewModelTest" />
+        <item itemvalue="JUnit.LoginViewModelTest.patientObjectCreatedSuccessfully" />
+        <item itemvalue="JUnit.BookAppointmentViewModelTest.setReceptionistIdUpdatesSuccessfully" />
+        <item itemvalue="JUnit.BookAppointmentViewModelTest.receptionistCreatedSuccessfully" />
       </list>
     </recent_temporary>
   </component>
