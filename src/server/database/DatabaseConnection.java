@@ -20,7 +20,7 @@ public class DatabaseConnection
     /** Constant holding the USER. */
     private static final String USER = "postgres";
     /** Constant holding the PASSWORD. */
-    private static final String PASSWORD = "anushka";
+    private static final String PASSWORD = "362304";
 
     /**
      * Returns the connection.

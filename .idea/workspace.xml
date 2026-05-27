@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b40ccfb0-76c9-4384-b688-1aa164ff68a9" name="Changes" comment="a">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/view/doctor/DoctorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/doctor/DoctorWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/view/patient/PatientWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/view/patient/PatientWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/database/DatabaseConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,34 +46,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ChatServer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ClinicServer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DbTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MVVM_Observer_Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MyApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestData.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/insan/Desktop/Schule/Uni/SEP2Shared/ViaClinic&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15527344&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ChatServer.executor": "Run",
+    "Application.ClinicServer.executor": "Run",
+    "Application.DbTest.executor": "Run",
+    "Application.MVVM_Observer_Main.executor": "Run",
+    "Application.MyApplication.executor": "Run",
+    "Application.TestData.executor": "Run",
+    "JUnit.BookAppointmentViewModelTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/insan/Desktop/Schule/Uni/SEP2Shared/ViaClinic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15527344",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Application.MVVM_Observer_Main">
+}]]></component>
+  <component name="RunManager">
     <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.networking.ChatServer" />
       <module name="VIAClinicumdas" />
@@ -150,17 +154,17 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ChatServer" />
-      <item itemvalue="Application.ClinicServer" />
-      <item itemvalue="Application.DbTest" />
-      <item itemvalue="Application.MVVM_Observer_Main" />
       <item itemvalue="Application.MyApplication" />
+      <item itemvalue="Application.ChatServer" />
+      <item itemvalue="Application.DbTest" />
+      <item itemvalue="Application.ClinicServer" />
+      <item itemvalue="Application.MVVM_Observer_Main" />
       <item itemvalue="Application.TestData" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MVVM_Observer_Main" />
         <item itemvalue="Application.ChatServer" />
+        <item itemvalue="Application.MVVM_Observer_Main" />
         <item itemvalue="Application.ClinicServer" />
         <item itemvalue="Application.DbTest" />
         <item itemvalue="Application.TestData" />
@@ -191,6 +195,7 @@
       <workItem from="1779574307584" duration="141000" />
       <workItem from="1779640103144" duration="383000" />
       <workItem from="1779658763355" duration="397000" />
+      <workItem from="1779849110330" duration="307000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -200,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779658808079</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="a">
+      <option name="closed" value="true" />
+      <created>1779849117894</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779849117894</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

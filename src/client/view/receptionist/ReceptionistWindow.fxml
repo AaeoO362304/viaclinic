@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.receptionist.ReceptionistWindowController">
    <children>
       <Button fx:id="bookButton" layoutX="39.0" layoutY="233.0" mnemonicParsing="false" onAction="#bookAppointmentButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Book Appointment" />
-      <Button fx:id="appointmentButton" layoutX="229.0" layoutY="233.0" mnemonicParsing="false" onAction="#todayAppointmentsButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Todays Appoitnments" />
+      <Button fx:id="appointmentButton" layoutX="229.0" layoutY="233.0" mnemonicParsing="false" onAction="#todayAppointmentsButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Todays Appointments" />
       <Button fx:id="logOutButton" layoutX="39.0" layoutY="295.0" mnemonicParsing="false" onAction="#logOutButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Log Out" />
       <Button fx:id="closeButton" layoutX="412.0" layoutY="295.0" mnemonicParsing="false" onAction="#closeButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Close" />
       <Label fx:id="receptionistLabel" layoutX="39.0" layoutY="80.0" prefHeight="89.0" prefWidth="520.0" text="Receptionist: ">
@@ -17,6 +17,6 @@
          </font>
       </Label>
       <Button fx:id="patientsButton" layoutX="229.0" layoutY="295.0" mnemonicParsing="false" onAction="#registeredPatientsButtonPressed" prefHeight="42.0" prefWidth="149.0" text="Registered Patients" />
-      <Button fx:id="allAppointmentsButton" layoutX="412.0" layoutY="233.0" mnemonicParsing="false" onAction="#allAppointmentsButtonPressed" prefHeight="42.0" prefWidth="149.0" text="All Appoitnments" />
+      <Button fx:id="allAppointmentsButton" layoutX="412.0" layoutY="233.0" mnemonicParsing="false" onAction="#allAppointmentsButtonPressed" prefHeight="42.0" prefWidth="149.0" text="All Appointments" />
    </children>
 </AnchorPane>
